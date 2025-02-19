@@ -1,0 +1,38 @@
+/* Grundlegendes Styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+footer {
+    display: flex; /* Flexbox aktivieren */
+    align-items: center; /* Vertikal zentrieren */
+    justify-content: center;
+    background-color: #222;
+    color: white;
+    padding: 10px 20px;
+}
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    display: flex; /* Navigationselemente nebeneinander */
+    gap: 30px; /* Abstand zwischen den Buttons */
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Button Hover */
+nav ul li a:hover {
+    color: gold;
+}
