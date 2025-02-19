@@ -23,6 +23,8 @@ header {
 .title {
     flex-grow: 1; /* Nimmt verfügbaren Platz ein */
     text-align: center; /* Zentriert den Titel */
+    font-family: "Great Vibes", cursive;
+    font-weight: bold;
 }
 
 /* Navigation */
