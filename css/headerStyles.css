@@ -1,0 +1,50 @@
+/* Grundlegendes Styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+    display: flex; /* Flexbox aktivieren */
+    align-items: center; /* Vertikal zentrieren */
+    justify-content: space-between; /* Platz zwischen den Elementen */
+    background-color: #222;
+    color: white;
+    padding: 10px 20px;
+}
+
+/* Logo */
+.logo img {
+    height: 50px;
+}
+
+/* Titel */
+.title {
+    flex-grow: 1; /* Nimmt verfügbaren Platz ein */
+    text-align: center; /* Zentriert den Titel */
+}
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    display: flex; /* Navigationselemente nebeneinander */
+    gap: 20px; /* Abstand zwischen den Buttons */
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Button Hover */
+nav ul li a:hover {
+    color: gold;
+}
