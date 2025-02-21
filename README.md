@@ -30,6 +30,7 @@ Footer: Impressum, Datenschutzerklärung, Über uns
 - Controller navigiert zwischen View und Model und macht auch die Anfrage an den Server (soweit ich des verstanden hab)
 - Abfrage an die Json-Datei wird über eine API mit Express.js gemacht
 - Express.js ist ne Form von Node.js und ist in der Server.js Datei implemetiert
+- node_modules Ordner NICHT PUSHEN
 #### Installation (Webstorm):
 1. Node.js downloaden über https://nodejs.org/en
 2. In Settings -> Languages & Frameworks -> Node.js
