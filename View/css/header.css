@@ -1,7 +1,6 @@
 /* Grundlegendes Styling */
 body {
     margin: 0;
-    padding-top: 50px;
     font-family: Arial, sans-serif;
 }
 
@@ -49,6 +48,10 @@ nav ul li a {
     color: white;
     text-decoration: none;
     font-size: 18px;
+}
+
+nav ul li a:last-child {
+    padding-right: 50px;
 }
 
 /* Button Hover */
