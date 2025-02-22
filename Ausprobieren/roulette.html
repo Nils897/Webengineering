@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./roulette.css">
+    <script defer src="roulette.js"></script>
+    <title>Roulette</title>
+</head>
+<body>
+    <div class="roulette-table">
+        <h1 class="roulette-heading">Roulette</h1>
+        <div class="roulette-wheel">
+            <div class="roulette-wheel-small">
+                <div class="roulette-numbers"></div>
+            </div>
+            <div class="roulette-wheel-smaller">
+                <img src="./roulette-cross.png" alt="cross">
+            </div>
+            
+            <div class="roulette-ball">
+                <div class="ball"></div>
+            </div>
+        </div>
+        <div class="roulette-bet">
+            <div class="numbers-block"></div>
+            <div class="colors-block">
+                <div class="betting-row">
+                    <div class="betting-row-item" id="firstTwelve" onclick="bet(firstTwelve, 'firstTwelve')">1st 12</div>
+                    <div class="betting-row-item" id="secondTwelve" onclick="bet(secondTwelve, 'secondTwelve')">2nd 12</div>
+                    <div class="betting-row-item" id="thirdTwelve" onclick="bet(thirdTwelve, 'thirdTwelve')">3rd 12</div>
+                </div>
+                <div class="betting-row">
+                    <div class="betting-row-item" id="firstHalf" onclick="bet(firstHalf, 'firstHalf')">1 to 18</div>
+                    <div class="betting-row-item" id="evenNumbers" onclick="bet(evenNumbers, 'evenNumbers')">Even</div>
+                    <div class="betting-row-item"  id="redNumbers" onclick="bet(redNumbers, 'redNumbers')">
+                        <div class="betting-row-red"></div>
+                    </div>
+                    <div class="betting-row-item" id="blackNumbers" onclick="bet(blackNumbers, 'blackNumbers')">
+                        
+                        <div class="betting-row-black" ></div>
+                    </div>
+                    <div class="betting-row-item" id="oddNumbers" onclick="bet(oddNumbers, 'oddNumbers')">Odd</div>
+                    <div class="betting-row-item" id="secondHalf" onclick="bet(secondHalf, 'secondHalf')">19 to 36</div>
+                </div>
+            </div>
+            <div class="betting-settings">
+
+            </div>
+        </div>
+        
+    </div>
+    
+</body>
+</html>
