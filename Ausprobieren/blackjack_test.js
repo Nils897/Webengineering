@@ -53,10 +53,12 @@ function checkGameEnd() {
 
     if (playerScore > 21) {
         document.getElementById("result").textContent = "Spieler ist über 21! Dealer gewinnt.";
+        document.getElementById("restart").disabled = false;
         return true;
     }
     if (dealerScore > 21) {
         document.getElementById("result").textContent = "Dealer ist über 21! Spieler gewinnt.";
+        document.getElementById("restart").disabled = false;
         return true;
     }
     if (dealerScore >= 17) {
@@ -67,6 +69,7 @@ function checkGameEnd() {
         } else {
             document.getElementById("result").textContent = "Unentschieden!";
         }
+        document.getElementById("restart").disabled = false;
         return true;
     }
     return false;
@@ -93,8 +96,12 @@ document.getElementById("stand").addEventListener("click", function() {
 });
 
 document.getElementById("restart").addEventListener("click", function() {
-    playerCards.forEach(card => {playerCards.pop()})
-    dealerCards.forEach(card => {dealerCards.pop()})
+  while (playerCards.length > 0) {
+      playerCards.pop();
+  }
+  while (dealerCards.length > 0) {
+      dealerCards.pop();
+  }
     start();
 })
 
@@ -105,5 +112,6 @@ function start (){
     updateUIPlayer();
     updateUIDealer()
     dealerCards.push(deck.pop());
+    document.getElementById("restart").disabled = true;
 }
 start();
