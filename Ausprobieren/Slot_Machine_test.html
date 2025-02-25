@@ -2,52 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="slot_machine.css">
+    <script defer src="slot_machine.js"></script>
     <title>Slot Machine</title>
 </head>
-<style>
-  body {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    background-color: #000000;
-    color: white;
-  }
-
-  .slot-machine {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 100px;
-  }
-
-  .reel {
-    width: 80px;
-    height: 80px;
-    overflow: hidden;
-    border: 3px solid #ffffff;
-    background: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-  }
-
-  button {
-    margin: 20px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    cursor: pointer;
-  }
-
-  .spin {
-    animation: spin 1s ease-out;
-  }
-
-  @keyframes spin {
-    0% { transform: translateY(-100%); opacity: 0; }
-    100% { transform: translateY(0%); opacity: 1; }
-  }
-</style>
 
 <body>
   <h1>Slot Machine</h1>
@@ -59,50 +17,4 @@
 <button onclick="spinReel()">Drehen</button>
 <p id="output"></p>
 </body>
-
-<script>
-  const symbols = ["🍒", "🍋", "🍊", "🍉", "⭐", "🔔"];
-
-  document.addEventListener("DOMContentLoaded", function() {
-      let ids = ["reel1", "reel2", "reel3"];
-      ids.forEach(id => {
-          document.getElementById(id).textContent = symbols[Math.floor(Math.random() * symbols.length)];
-      });
-  });
-
-  function spin() {
-      let symbolArray = [];
-      for (let i = 0; i <= 2; i++) {
-          let randomSymbol = Math.floor(Math.random() * symbols.length);
-          symbolArray.push(randomSymbol);
-      }
-      document.querySelectorAll(".reel").forEach((reel, i) => {
-          setTimeout(() => {
-              reel.classList.add("spin");
-              reel.textContent = symbols[symbolArray[i]];
-              setTimeout(() => {
-                  reel.classList.remove("spin");
-              }, 500);
-          }, i * 200);
-      });
-      return getResult(symbolArray);
-  }
-
-    function getResult(symbolArray) {
-      let result = "";
-        if (symbolArray[0] === symbolArray[1] && symbolArray[0] === symbolArray[2] && symbolArray[1] === symbolArray[2]) {
-            return result = "Alle Symbole sind gleich";
-        }
-        else if (symbolArray[0] === symbolArray[1] || symbolArray[0] === symbolArray[2] || symbolArray[1] === symbolArray[2]) {
-            return result = "2 Symbole sind gleich";
-        }
-        else {
-            return result = "Keine Symbole sind gleich";
-        }
-    }
-
-    function spinReel() {
-      document.getElementById("output").innerText = spin();
-    }
-</script>
 </html>
