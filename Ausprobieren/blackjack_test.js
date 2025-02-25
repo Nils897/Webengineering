@@ -69,13 +69,13 @@ function checkGameEnd() {
             end()
 
         }
-        if (dealerScore > 21) {
+        else if (dealerScore > 21) {
             document.getElementById("result").textContent = "Dealer ist über 21! Spieler gewinnt.";
             Account += parseInt(betAmount [counter])
             end()
 
         }
-        if (dealerScore >= 17) {
+        else if (dealerScore >= 17) {
             if (playerScore > dealerScore) {
                 document.getElementById("result").textContent = "Spieler gewinnt!";
                 Account += parseInt(betAmount [counter])
