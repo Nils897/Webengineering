@@ -2,4 +2,12 @@ main {
     margin-top: 100px;
     margin-bottom: 80px;
     padding: 20px;
+
+}
+
+body {
+    background-image: url('../img/Designer.jpeg'); /* Pfad zu deinem Hintergrundbild */
+    background-size: cover; /* Bild füllt den gesamten Bereich aus */
+    background-position: center; /* Bild bleibt zentriert */
+    background-attachment: fixed; /* Bild bleibt beim Scrollen fixiert */
 }
