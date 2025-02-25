@@ -5,29 +5,8 @@
     <title>Roulette Test</title>
 </head>
 <body>
-<canvas id="TestCanvas" height="500" width="500"></canvas>
-<script>
-    const canvas = document.getElementById("TestCanvas");
-    const ctx = canvas.getContext("2d");
-
-    ctx.fillStyle = "#FF0000";
-    ctx.fillRect(0, 0, 500, 500);
-
-    ctx.beginPath();
-    ctx.arc(100, 100, 50, 0, Math.PI / 19, true);
-    ctx.fillStyle = "#0000FF";
-    ctx.fill();
-
-    function animate() {
-        x += 2;
-        ctx.fillStyle = "#00ff00";
-        ctx.fillRect(x, 100, 50, 50);
-
-        requestAnimationFrame(animate);
-    }
-    let x = 0;
-
-</script>
+<canvas id="TestCanvas" height="800" width="800"></canvas>
+<script defer src="Roulette.js"></script>
 
 </body>
 </html>
