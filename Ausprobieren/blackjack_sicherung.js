@@ -58,39 +58,36 @@ function end() {
 }
 
 function checkGameEnd() {
-    let counter = 0
-    playerHands.forEach((playerCards) => {
-        let playerScore = getScore(playerCards)
-        let dealerScore = getScore(dealerCards)
+    let playerScore = getScore(playerCards)
+    let dealerScore = getScore(dealerCards)
 
-        if (playerScore > 21) {
-            document.getElementById("result").textContent = "Spieler ist über 21! Dealer gewinnt.";
-            Account -= betAmount [counter]
-            end()
-
-        }
-        if (dealerScore > 21) {
-            document.getElementById("result").textContent = "Dealer ist über 21! Spieler gewinnt.";
-            Account += parseInt(betAmount [counter])
-            end()
-
-        }
-        if (dealerScore >= 17) {
-            if (playerScore > dealerScore) {
-                document.getElementById("result").textContent = "Spieler gewinnt!";
-                Account += parseInt(betAmount [counter])
-            } else if (playerScore < dealerScore) {
-                document.getElementById("result").textContent = "Dealer gewinnt!";
-                Account -= betAmount [counter]
-            } else {
-                document.getElementById("result").textContent = "Unentschieden!";
-                end()
-            }
+    if (playerScore > 21) {
+        document.getElementById("result").textContent = "Spieler ist über 21! Dealer gewinnt.";
+        Account -= betAmount [currentHandIndex]
+        end()
+        return true;
+    }
+    if (dealerScore > 21) {
+        document.getElementById("result").textContent = "Dealer ist über 21! Spieler gewinnt.";
+        Account += parseInt(betAmount [currentHandIndex])
+        end()
+        return true;
+    }
+    if (dealerScore >= 17) {
+        if (playerScore > dealerScore) {
+            document.getElementById("result").textContent = "Spieler gewinnt!";
+            Account += parseInt(betAmount [currentHandIndex])
+        } else if (playerScore < dealerScore) {
+            document.getElementById("result").textContent = "Dealer gewinnt!";
+            Account -= betAmount [currentHandIndex]
+        } else {
+            document.getElementById("result").textContent = "Unentschieden!";
             end()
         }
-        })
-
-
+        end()
+        return true;
+    }
+    return false;
 }
 
 
