@@ -1,6 +1,5 @@
-// Lädt den Header und Footer
 function loadLayout() {
-    fetch("header.html")
+    fetch("headerNoLogIn.html")
         .then(response => response.text())
         .then(data => {
             document.getElementById("header").innerHTML = data;
@@ -14,34 +13,14 @@ function loadLayout() {
         .catch(error => console.error("Fehler beim Laden des Footers:", error));
 }
 
-// Lädt eine neue Seite in den #content-Bereich, ohne die gesamte Seite zu reloaden
-function loadPage(page) {
-    fetch(page)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("content").innerHTML = data;
-            window.history.pushState({ page: page }, "", page); // URL in der Adresszeile aktualisieren
-        })
-        .catch(error => console.error("Fehler beim Laden der Seite:", error));
-}
-
-// Aktiviert das dynamische Laden für Links im Header/Footer
+// Dynamische Navigation aktivieren
 function setupNavLinks() {
-    document.body.addEventListener("click", function (event) {
-        if (event.target.tagName === "A" && event.target.hasAttribute("data-page")) {
-            event.preventDefault(); // Standardseitenwechsel verhindern
-            const page = event.target.getAttribute("href"); // Seite aus href holen
-            loadPage(page);
-        }
+    document.querySelectorAll("#header a[data-page]").forEach(link => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault();
+            loadPage(link.getAttribute("href"));
+        });
     });
 }
 
-// Stellt sicher, dass die richtige Seite geladen wird, wenn der Benutzer vor/zurück klickt
-window.addEventListener("popstate", function (event) {
-    if (event.state && event.state.page) {
-        loadPage(event.state.page);
-    }
-});
-
-// Startet das Layout-Laden, wenn die Seite geladen ist
 document.addEventListener("DOMContentLoaded", loadLayout);

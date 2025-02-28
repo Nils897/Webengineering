@@ -18,7 +18,14 @@
     max-height: 150px;
 }
 
+main {
+    margin-top: 120px;
+    margin-bottom: 80px;
+    padding: 20px;
+}
+
 body {
     background-color: #434242;
     color: #dfdede;
+    font-family: Arial, sans-serif;
 }
