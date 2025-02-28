@@ -121,6 +121,7 @@ function start (){
     document.getElementById("hit").disabled = false;
     document.getElementById("stand").disabled = false;
     document.getElementById("start").disabled = true;
+    document.getElementById("result").textContent = "";
 }
 
 // Hinzufügen eines Einsatz-Sliders und der Double- und Split-Buttons
