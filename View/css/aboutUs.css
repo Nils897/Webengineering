@@ -17,3 +17,8 @@
     object-fit: contain;
     max-height: 150px;
 }
+
+body {
+    background-color: #434242;
+    color: #dfdede;
+}
