@@ -13,14 +13,20 @@ function loadLayout() {
         .catch(error => console.error("Fehler beim Laden des Footers:", error));
 }
 
-// Dynamische Navigation aktivieren
 function setupNavLinks() {
     document.querySelectorAll("#header a[data-page]").forEach(link => {
         link.addEventListener("click", function (event) {
             event.preventDefault();
-            loadPage(link.getAttribute("href"));
+            const page = link.getAttribute("href");
+
+            if (page === "index.html") {
+                window.location.href = "index.html"; // Startseite komplett neu laden
+            } else {
+                loadPage(page);
+            }
         });
     });
 }
+
 
 document.addEventListener("DOMContentLoaded", loadLayout);
