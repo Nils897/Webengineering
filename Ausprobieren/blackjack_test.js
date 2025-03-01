@@ -69,13 +69,13 @@ function checkGameEnd() {
             end()
 
         }
-        if (dealerScore > 21) {
+        else if (dealerScore > 21) {
             document.getElementById("result").textContent = "Dealer ist über 21! Spieler gewinnt.";
             Account += parseInt(betAmount [counter])
             end()
 
         }
-        if (dealerScore >= 17) {
+        else if (dealerScore >= 17) {
             if (playerScore > dealerScore) {
                 document.getElementById("result").textContent = "Spieler gewinnt!";
                 Account += parseInt(betAmount [counter])
@@ -121,6 +121,7 @@ function start (){
     document.getElementById("hit").disabled = false;
     document.getElementById("stand").disabled = false;
     document.getElementById("start").disabled = true;
+    document.getElementById("result").textContent = "";
 }
 
 // Hinzufügen eines Einsatz-Sliders und der Double- und Split-Buttons
