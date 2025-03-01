@@ -5,7 +5,29 @@ const blackJackField = document.querySelector('#blackjack-field');
 const gameView = document.querySelector('#game');
 
 
-async function startGame(game) {
+function closeGame(xOffset){
+    gameView.innerHTML = '';
+    const zoomOutTiming = {
+        duration: 1000,
+        iterations: 1,
+        easing: 'ease-out'
+    };
+    const zoomOut = [
+        { transform: `scale(1.5) translateX(${xOffset})` },
+        { transform: 'scale(1) translateX(0)' }];
+
+    overlay.animate(zoomOut, zoomOutTiming);
+    overlay.style.transform = 'scale(1) translateX(0)';
+    setTimeout(() =>{
+        gameView.style.display = 'none';
+        document.querySelectorAll('.clickable-field').forEach((field) => {
+            field.style.display = 'flex';
+        });
+    }, 1000);
+
+}
+
+function startGame(game) {
     gameView.style.display = 'flex';
     document.querySelectorAll('.clickable-field').forEach((field) => {
         field.style.display = 'none';
@@ -22,7 +44,7 @@ async function startGame(game) {
                 const zoomIn = [
                 { transform: 'scale(1) translateX(0)' },
                 { transform: 'scale(1.5) translateX(10%)' }]
-                await overlay.animate(zoomIn, zoomInTiming);
+                overlay.animate(zoomIn, zoomInTiming);
                 overlay.style.transform = 'scale(1.5) translateX(10%)';
                 setTimeout(() => {
                     console.log('slot machine game started');
@@ -37,7 +59,13 @@ async function startGame(game) {
                 overlay.animate(zoomIn, zoomInTiming);
                 overlay.style.transform = 'scale(1.5) translateX(-10%)';
                 setTimeout(() => {
-                    gameView.innerHTML = `<iframe src="roulette.html"></iframe>`;
+                    gameView.innerHTML = `
+                    <button class="close-button">&#10006;</button>
+                    <iframe src="roulette.html"></iframe>
+                    `;
+                    document.querySelector(".close-button").addEventListener("click", () => {
+                        closeGame('-10%');
+                    })
                 }, 1000);
                 break;
             }
@@ -53,7 +81,6 @@ async function startGame(game) {
                 }, 1000);
                 break;
             }
-            break;
     }
 }
 
