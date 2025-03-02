@@ -58,47 +58,50 @@ function end() {
 }
 
 function checkGameEnd() {
-    let playerScore = getScore(playerCards)
-    let dealerScore = getScore(dealerCards)
+    let counter = 0
+    playerHands.forEach((playerCards) => {
+        let playerScore = getScore(playerCards)
+        let dealerScore = getScore(dealerCards)
 
-    if (playerScore > 21) {
-        document.getElementById("result").textContent = "Spieler ist über 21! Dealer gewinnt.";
-        Account -= betAmount [currentHandIndex]
-        end()
-        return true;
-    }
-    if (dealerScore > 21) {
-        document.getElementById("result").textContent = "Dealer ist über 21! Spieler gewinnt.";
-        Account += parseInt(betAmount [currentHandIndex])
-        end()
-        return true;
-    }
-    if (dealerScore >= 17) {
-        if (playerScore > dealerScore) {
-            document.getElementById("result").textContent = "Spieler gewinnt!";
-            Account += parseInt(betAmount [currentHandIndex])
-        } else if (playerScore < dealerScore) {
-            document.getElementById("result").textContent = "Dealer gewinnt!";
-            Account -= betAmount [currentHandIndex]
-        } else {
-            document.getElementById("result").textContent = "Unentschieden!";
+        if (playerScore > 21) {
+            document.getElementById("result").textContent = "Spieler ist über 21! Dealer gewinnt.";
+            Account -= betAmount [counter]
+            end()
+
+        }
+        else if (dealerScore > 21) {
+            document.getElementById("result").textContent = "Dealer ist über 21! Spieler gewinnt.";
+            Account += parseInt(betAmount [counter])
+            end()
+
+        }
+        else if (dealerScore >= 17) {
+            if (playerScore > dealerScore) {
+                document.getElementById("result").textContent = "Spieler gewinnt!";
+                Account += parseInt(betAmount [counter])
+            } else if (playerScore < dealerScore) {
+                document.getElementById("result").textContent = "Dealer gewinnt!";
+                Account -= betAmount [counter]
+            } else {
+                document.getElementById("result").textContent = "Unentschieden!";
+                end()
+            }
             end()
         }
-        end()
-        return true;
-    }
-    return false;
+    })
+
+
 }
 
 
 
 document.getElementById("restart").addEventListener("click", function() {
-  while (playerCards.length > 0) {
-      playerCards.pop();
-  }
-  while (dealerCards.length > 0) {
-      dealerCards.pop();
-  }
+    while (playerCards.length > 0) {
+        playerCards.pop();
+    }
+    while (dealerCards.length > 0) {
+        dealerCards.pop();
+    }
     betDisplay.textContent = `Einsatz: ${betSlider.value}€`;
     start();
 })
@@ -118,6 +121,7 @@ function start (){
     document.getElementById("hit").disabled = false;
     document.getElementById("stand").disabled = false;
     document.getElementById("start").disabled = true;
+    document.getElementById("result").textContent = "";
 }
 
 // Hinzufügen eines Einsatz-Sliders und der Double- und Split-Buttons

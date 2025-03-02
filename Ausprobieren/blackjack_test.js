@@ -8,6 +8,7 @@ const values = [
     { name: "Ass", value: 11 }
 ];
 let Account = 100
+let handResults = [];
 
 
 function createDeck() {
@@ -40,10 +41,25 @@ function formatCards(cards) {
     return cards.map(card => `${card.suit} ${card.name}`).join(", ");
 }
 
+// Aktualisierte updateUIPlayer-Funktion: Zeigt alle Hände an
 function updateUIPlayer() {
-    document.getElementById("player-cards").textContent = "Spieler Karten: " + formatCards(playerCards);
-    document.getElementById("player-score").textContent = "Spieler Punkte: " + getScore(playerCards);
+    const playerContainer = document.getElementById("player-cards");
+    playerContainer.innerHTML = ""; // Vorherigen Inhalt löschen
+    playerHands.forEach((hand, index) => {
+        const handDiv = document.createElement("div");
+        let label = "Hand " + (index + 1);
+        if (index === currentHandIndex) {
+            label += " (Aktiv)";
+        }
+        const score = getScore(hand);
+        handDiv.innerHTML = `<strong>${label}</strong>: ${formatCards(hand)} – Punkte: ${score}`;
+        if (handResults[index]) {
+            handDiv.innerHTML += ` – Ergebnis: ${handResults[index]}`;
+        }
+        playerContainer.appendChild(handDiv);
+    });
 }
+
 function updateUIDealer(){
     document.getElementById("dealer-cards").textContent = "Dealer Karten: " + formatCards(dealerCards);
     document.getElementById("dealer-score").textContent = "Dealer Punkte: " + getScore(dealerCards);
@@ -55,42 +71,35 @@ function end() {
     document.getElementById("hit").disabled = true;
     document.getElementById("restart").disabled = false;
     doubleButton.disabled = true;
+    deck = createDeck();
 }
 
 function checkGameEnd() {
-    let counter = 0
-    playerHands.forEach((playerCards) => {
-        let playerScore = getScore(playerCards)
-        let dealerScore = getScore(dealerCards)
-
-        if (playerScore > 21) {
-            document.getElementById("result").textContent = "Spieler ist über 21! Dealer gewinnt.";
-            Account -= betAmount [counter]
-            end()
-
-        }
-        else if (dealerScore > 21) {
-            document.getElementById("result").textContent = "Dealer ist über 21! Spieler gewinnt.";
-            Account += parseInt(betAmount [counter])
-            end()
-
-        }
-        else if (dealerScore >= 17) {
-            if (playerScore > dealerScore) {
-                document.getElementById("result").textContent = "Spieler gewinnt!";
-                Account += parseInt(betAmount [counter])
-            } else if (playerScore < dealerScore) {
-                document.getElementById("result").textContent = "Dealer gewinnt!";
-                Account -= betAmount [counter]
+    // Dealer zieht (falls noch nicht geschehen) – hier sollte der Dealer bereits fertig sein (score >= 17)
+    let dealerScore = getScore(dealerCards);
+    handResults = []; // Ergebnisse zurücksetzen
+    for (let i = 0; i < playerHands.length; i++) {
+        let pScore = getScore(playerHands[i]);
+        if (pScore > 21) {
+            handResults[i] = "Verloren (über 21)";
+            Account -= parseInt(betAmount[i]);
+        } else if (dealerScore > 21) {
+            handResults[i] = "Gewonnen (Dealer über 21)";
+            Account += parseInt(betAmount[i]);
+        } else {
+            if (pScore > dealerScore) {
+                handResults[i] = "Gewonnen";
+                Account += parseInt(betAmount[i]);
+            } else if (pScore < dealerScore) {
+                handResults[i] = "Verloren";
+                Account -= parseInt(betAmount[i]);
             } else {
-                document.getElementById("result").textContent = "Unentschieden!";
-                end()
+                handResults[i] = "Unentschieden";
             }
-            end()
         }
-        })
-
-
+    }
+    updateUIPlayer();
+    end();
 }
 
 
@@ -108,21 +117,32 @@ document.getElementById("restart").addEventListener("click", function() {
 
 
 function start (){
+    // Ergebnisse der einzelnen Hände zurücksetzen
+    handResults = [];
+    document.getElementById("result").textContent = "";
+
+    // Karten neu austeilen
+    playerCards = [];
+    dealerCards = [];
     playerCards.push(deck.pop(), deck.pop());
-    dealerCards.push(deck.pop(),);
+    dealerCards.push(deck.pop());
+
     playerHands = [playerCards];
     currentHandIndex = 0;
+
     updateUIPlayer();
-    updateUIDealer()
+    updateUIDealer();
     dealerCards.push(deck.pop());
+
     doubleButton.disabled = !canDouble();
     splitButton.disabled = !canSplit();
     document.getElementById("restart").disabled = true;
     document.getElementById("hit").disabled = false;
     document.getElementById("stand").disabled = false;
     document.getElementById("start").disabled = true;
-    document.getElementById("result").textContent = "";
 }
+
+
 
 // Hinzufügen eines Einsatz-Sliders und der Double- und Split-Buttons
 
@@ -183,15 +203,21 @@ doubleButton.addEventListener("click", function() {
 
 splitButton.addEventListener("click", function() {
     if (!canSplit()) return;
-    const secondHand = [playerCards.pop(),deck.pop()];
-    playerHands[currentHandIndex] = [playerCards.pop(),deck.pop()];
-    playerHands.push(secondHand);
-    betAmount [currentHandIndex+1] = betAmount [currentHandIndex];
-    currentHandIndex = 0;
+    // Beim Splitten: Die beiden Karten der aktuellen Hand trennen
+    let card1 = playerCards[0];
+    let card2 = playerCards[1];
+    // Setze die aktive Hand neu: erste Hand erhält die erste Karte plus ein zusätzliches Blatt vom Deck
+    playerHands[currentHandIndex] = [card1, deck.pop()];
+    // Neue Hand mit der zweiten Karte plus ebenfalls eine Karte ziehen
+    const newHand = [card2, deck.pop()];
+    playerHands.push(newHand);
+    // Ziehe auch für den Einsatz jeweils den gleichen Betrag ab
+    betAmount[currentHandIndex + 1] = betAmount[currentHandIndex];
+    // Setze die aktive Hand wieder (zum Beispiel bleibt die erste Hand aktiv)
     playerCards = playerHands[currentHandIndex];
     updateUIPlayer();
-    splitButton.disabled = !canSplit();
 });
+
 
 function switchToNextHand() {
     if (currentHandIndex < playerHands.length - 1) {
