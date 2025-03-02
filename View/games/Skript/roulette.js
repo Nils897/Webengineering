@@ -9,7 +9,7 @@ let numbers = ['00', '27', '10', '25', '29', '12', '8', '19', '31', '18', '6', '
 const redNumbers = ['27', '25', '12', '19', '18', '21', '16', '23', '14', '9', '30', '7', '32', '5', '34', '3', '36', '1'];
 const blackNumbers = ['10', '29', '8', '31', '6', '33', '4', '35', '2',  '28', '26', '11', '20', '17', '22', '15', '24', '13'];
 
-//other betting options
+//Gruppen, auf die der Nutzer setzen kann
 const firstRow = [];
 const secondRow = [];
 const thirdRow = [];
@@ -25,14 +25,14 @@ const evenNumbers = [];
 
 
 function addRouletteWheelNumbers(){
-    // Add numbers to the roulette wheel
+    /* Zahlen zu Roulette-Rad hinzufügen */
     const angleStep = 360 / numbers.length;
     numbers.forEach((number, index) => {
     const numberElement = document.createElement('div');
     numberElement.classList.add('roulette-number');
     numberElement.textContent = number;
     const angle = index * angleStep;
-    numberElement.style.transform = `rotate(${angle}deg) translate(22.5vh) rotate(90deg)`;
+    numberElement.style.transform = `rotate(${angle}deg) translate(32vh) rotate(90deg)`;
     numbersContainer.appendChild(numberElement);
     numbersContainer.style.transform = `rotate(-84.5deg)`;
     });
@@ -40,7 +40,8 @@ function addRouletteWheelNumbers(){
 
 
 function determineGroup(number) {
-    //first, second and third twelve
+    /* Zuordnung einer Zahl in bestimmte Gruppen */
+    //füllen der Zwölfer-Blöcke
     if (number <= 12) {
         firstTwelve.push(number.toString());
     }
@@ -54,7 +55,7 @@ function determineGroup(number) {
         secondHalf.push(number.toString());
     }
 
-    //first, second and third row
+    //füllen der Reihen
     if (number % 3 === 1) {
         firstRow.push(number.toString());
     }
@@ -65,7 +66,7 @@ function determineGroup(number) {
         thirdRow.push(number.toString());
     }
 
-    //odd and even numbers
+    //Gerade/ungerade Zahlen
     if (number % 2 === 0) {
         evenNumbers.push(number.toString());
     }  
@@ -76,10 +77,10 @@ function determineGroup(number) {
 }
 
 function placeBettingField(){
-    //Add numbers to the betting section
+    /* Zahlen in dem Wettbereich einfügen */
     const numbersBlock = document.querySelector('.numbers-block');
     
-    //Add the zero and double zero
+    //'0' und '00'
     let zeroRow = document.createElement('div');
     zeroRow.classList.add('numbers-row');
     let zeroElement = document.createElement('div');
@@ -100,22 +101,22 @@ function placeBettingField(){
     zeroRow.appendChild(zeroElement);
     numbersBlock.appendChild(zeroRow);
 
-    //add numbers from 1 to 36
+    //Zahlen 1 bis 36
     let currentNumber = 1;
     while (currentNumber <= 36) {
     let row = document.createElement('div');
     row.classList.add('numbers-row');
     for (let i = 0; i < 3; i++) {
-        //create the number html element
+        //html element für die Zahl erstellen
         let numberElement = document.createElement('div');
         numberElement.id = currentNumber;
 
-        //add click event listener to place the bet
+        //click event listener für die Auswahl der Zahl
         let bettingNumber = [currentNumber.toString()];
         numberElement.addEventListener('click', () => bet(bettingNumber, bettingNumber[0]));
         numberElement.classList.add('number');
 
-        //decide the color of the number field
+        //Entscheidung der Farbe des Felds
         if(redNumbers.includes(currentNumber.toString())) {
             numberElement.style.backgroundColor = 'red';
         }
@@ -123,20 +124,20 @@ function placeBettingField(){
             numberElement.style.backgroundColor = 'black';
         }
         
-        //write the number in the field (and rotate it)
+        //Zahl in das Feld schreiben und rotieren
         let numberSpan = document.createElement('span');
         numberSpan.textContent = currentNumber;
         numberElement.appendChild(numberSpan);
         row.appendChild(numberElement);
 
-        //determine the groups of the numbers
+        //Nummer in richtige Gruppen zuweisen
         determineGroup(currentNumber);
 
         currentNumber++;
     }
     numbersBlock.appendChild(row);
     }
-    //add the 2 to 1 row
+    //2-to-1 Felder
     let twoToOneRow = document.createElement('div');
     twoToOneRow.classList.add('numbers-row');
     for (let i = 0; i < 3; i++) {
@@ -153,12 +154,9 @@ function placeBettingField(){
 }
 
 
-
-
-
-//gets the winning number and spins the ball to that number (number must be a string)
 function spinBall(number) {
-    // spins the ball 5 times before landing on the final angle
+    /* bekommt die Gewinnerzahl (als string) und dreht die Kugel auf dieses Feld */
+    // Kugel macht 5 Runden, bevor er auf der richtigen Zahl stehenbleibt
     let angle = 9.47 * numbers.indexOf(number) + 4.5;
     angle = angle + 360 * 5;
     const spinningBall = [
@@ -166,7 +164,7 @@ function spinBall(number) {
         { transform: `rotate(${angle}deg)`, scale: 0.8 }
     ]
 
-    // the ball takes 1s to spin 360 degrees and eases out towards the end
+    // Kugel braucht 1s pro Umdrehung und wird immer langsamer
     const spinningBallTiming = {
         duration: angle * (1000 / 360),
         iterations: 1,
@@ -179,17 +177,18 @@ function spinBall(number) {
 
 
 function placeChip(id){
-    //remove all chips from the field
+    /* platziert den chip auf das ausgewählte Feld */
+    //zuerst alle chips entfernen
     document.querySelectorAll('.chip').forEach(chip => chip.remove());
     const chip = document.createElement('div');
     chip.classList.add('chip');
-    //add possibility to remove the chip
+    //Möglichkeit Chip durch draufklicken zu entfernen
     chip.addEventListener('click', (event) => {
         document.querySelector('.betting-settings').innerHTML = '';
         event.stopPropagation();
         chip.remove();
     });
-    //add the chip to the selected field
+    //Chip zum ausgewählten Feld hinzufügen
     document.getElementById(id).appendChild(chip);
 
     
@@ -197,7 +196,8 @@ function placeChip(id){
 
 
 function bet(numbers, id) {
-    //make form appear to place bet
+    /* verlangt Nutzer nach Wettbetrag */
+    //Formular erscheinen lassen
     const bettingSettings = document.querySelector('.betting-settings');
     bettingSettings.innerHTML = `
     <form id="bet-form">
@@ -216,12 +216,14 @@ function bet(numbers, id) {
 
 
 function game(numbers, amount){
+    /* bekommt gewinnende Zahl aus dem Backend und dreht die Kugel */
     document.querySelector('.betting-settings').innerHTML = '';
-    //interaction with backend here
+    //interaktion mit backend hier
     spinBall(numbers[0]);
 }
 
 function startRoulette(){
+    /* Werte/Tisch initialisieren */
     rouletteBall = document.querySelector('.roulette-ball');
     ball = document.querySelector('.ball');
     wheel = document.querySelector('.roulette-wheel');
@@ -230,6 +232,8 @@ function startRoulette(){
     addRouletteWheelNumbers();
 }
 
+
+//Spiel starten
 startRoulette();
 
 

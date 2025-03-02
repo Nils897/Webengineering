@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url('../img/Designer.jpeg'); /* Hintergrundbild */
+    /*background-image: url('../img/Designer.jpeg'); /* Hintergrundbild */
     background-size: cover; /* Bild füllt den gesamten Bereich */
     background-position: center;
     background-attachment: fixed; /* Fixiert das Hintergrundbild */
@@ -24,6 +24,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 /* Allgemeine Button-Stile */
@@ -42,21 +44,21 @@ main {
 
 /* Slot Machine Button (oben links) */
 #slot-button {
-    top: 24%;
-    left: 10%;
+    top: 42%;
+    left: 12%;
 }
 
 /* Blackjack Button (zentral) */
 #blackjack-button {
-    top: 35%;
+    top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
 /* Roulette Button (unten rechts) */
 #roulette-button {
-    bottom: 45%;
-    right: 10%;
+    bottom: 35%;
+    right: 20%;
 }
 
 /* Hover-Effekt */
@@ -64,4 +66,69 @@ main {
     background: gold;
     color: black;
     transform: scale(1.1);
+}
+
+/* Hintergrund füllt die Seite komplett aus */
+#content {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Hintergrundbild */
+.background-image {
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Container für das Spiel */
+#game {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+/* Container für das Spiel */
+#game iframe {
+    margin: 0;
+    margin-top: 11.5vh;
+    padding: 0;
+    width: 100%;
+    height: 77%;
+    border: none;
+}
+
+/* Schließen-Button */
+.close-button {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    position: absolute;
+    top: 18vh;
+    right: 2vw;
+    width: 5vh;
+    height: 5vh;
+    font-size: 2.5vh;
+    border-radius: 1vh;
+    z-index: 10;
+    transition: scale 0.1s, background-color 0.1s;
+}
+
+/* Hovern über Schließen-Button */
+.close-button:hover{
+    scale: 1.05;
+    background-color: gold;
+}
+
+/* Klicken auf Schließen-Button */
+.close-button:active {
+    scale: 0.95;
 }

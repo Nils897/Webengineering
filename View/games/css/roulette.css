@@ -1,6 +1,7 @@
+/* Roulette-Tisch (Container des Spiels) */
 .roulette-table {
     font-family: Arial, Helvetica, sans-serif;
-    height: 60vh;
+    height: 80vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -10,9 +11,297 @@
     border: 2vh solid brown;
     border-radius: 4vh;
     padding: 2vh;
-    /* box-sizing: border-box;
-    min-width: 700px; */
+    align-self: center;
 }
+
+/* Überschrift des Spiels */
+.roulette-heading {
+    position: absolute;
+    top: 2vh;
+    color: white;
+    font-size: 5vh;
+    font-weight: bold;
+}
+
+/* Größe und Form des Rads */
+.roulette-wheel, .roulette-ball {
+    width: 70vh;
+    height: 70vh;
+    border-radius: 70vh;
+    
+}
+
+/* Container für die Kugel */
+.roulette-ball {
+    transform: rotateZ(4deg);
+}
+
+/* Äußerer Bereich des Roulette-Rads */
+.roulette-wheel {
+    outline: 0.3vh solid black;
+    border: 1vh solid gold;
+    transform: rotateZ(-4deg);
+    background: 
+    conic-gradient(
+        green 0deg 9.47deg, red 9.47deg 18.94deg,
+        black 18.94deg 28.41deg, red 28.41deg 37.88deg,
+        black 37.88deg 47.35deg, red 47.35deg 56.82deg,
+        black 56.82deg 66.29deg, red 66.29deg 75.76deg,
+        black 75.76deg 85.23deg, red 85.23deg 94.7deg,
+        black 94.7deg 104.17deg, red 104.17deg 113.64deg,
+        black 113.64deg 123.11deg, red 123.11deg 132.58deg,
+        black 132.58deg 142.05deg, red 142.05deg 151.52deg,
+        black 151.52deg 160.99deg, red 160.99deg 170.46deg,
+        black 170.46deg 179.93deg, green 179.93deg 189.4deg,
+        black 189.4deg 198.87deg, red 198.87deg 208.34deg,
+        black 208.34deg 217.81deg, red 217.81deg 227.28deg,
+        black 227.28deg 236.75deg, red 236.75deg 246.22deg,
+        black 246.22deg 255.69deg, red 255.69deg 265.16deg,
+        black 265.16deg 274.63deg, red 274.63deg 284.1deg,
+        black 284.1deg 293.57deg, red 293.57deg 303.04deg,
+        black 303.04deg 312.51deg, red 312.51deg 321.98deg,
+        black 321.98deg 331.45deg, red 331.45deg 340.92deg,
+        black 340.92deg 350.39deg, red 350.39deg 360deg
+    );
+}
+
+/* Zahlen auf dem Roulette-Rad */
+.roulette-numbers {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+/* Einzelne Zahl auf dem Roulette-Rad */
+.roulette-number {
+    position: absolute;
+    transform-origin: center center;
+    font-size: 2.5vh;
+    font-weight: bold;
+    color: white;
+}
+
+/* mittlere Sektion im Rad */
+.roulette-wheel-small {
+    background: repeating-conic-gradient(gold 0deg 0.7deg, transparent 0.7deg 9.47deg);
+    background-color: green;
+    width: 58vh;
+    height: 58vh;
+    border-radius: 50vh;
+    margin-top: 5.7vh;
+    margin-left: 5.7vh;
+    border: 0.3vh solid black;
+    position: absolute;
+    transform: rotate(-0.5deg);
+}
+
+/* kleinste Sektion im Rad */
+.roulette-wheel-smaller {
+    background-color: goldenrod;
+    width: 45vh;
+    height: 45vh;
+    border-radius: 50vh;
+    margin-top: 12.4vh;
+    margin-left: 12.4vh;
+    border: 0.3vh solid black;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Bild innerhalb des Rads */
+.roulette-wheel-smaller img {
+    width: 70%;
+    height: 70%;
+    transform: rotateZ(5deg);
+}
+
+/* Kugel */
+.ball {
+    background-color: rgb(255, 255, 255);
+    width: 2vh;
+    height: 2vh;
+    justify-self: center;
+    border-radius: 5vh;
+}
+
+/* Wettbereich */
+.roulette-bet {
+    display: flex;
+}
+
+
+/* Ziffernblock */
+.numbers-block {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+/* Reihe von Zahlenfeldern */
+.numbers-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Zahlenfeld innerhalb des Ziffernblocks */
+.number {
+    flex: 1;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.8vh;
+    font-weight: bold;
+    color: white;
+    outline: 0.3vh solid white;
+    cursor: pointer;
+}
+
+/* Zahl innerhalb eines Zahlenfeldes */
+.number span {
+    align-self: center;
+    text-align: center;
+    width: 100%;
+}
+
+
+/* Wettfelder außerhalb des Ziffernblocks */
+.colors-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Reihe aus Wettfeldern außerhalb des Ziffernblocks */
+.betting-row {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* schwarzes Wettfeld */
+.betting-row-red {
+    width: 70%;
+    height: 70%;
+    border-radius: 0.5vh;
+    background-color: red;
+}
+
+/* rotes Wettfeld */
+.betting-row-black {
+    width: 70%;
+    height: 70%;
+    border-radius: 0.5vh;
+    background-color: black;
+}
+
+/* Wettfeld außerhalb des Ziffernblocks */
+.betting-row-item {
+    flex: 1;
+    outline: 0.3vh solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.8vh;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+
+/* Wettformular */
+.betting-settings form{
+    position: absolute;
+    width: 40vw;
+    height: 20vh;
+    bottom: 1vh;
+    right: 15vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2vw;
+    align-items: center;
+}
+
+
+/* Eingabefeld des Wettformulars */
+.betting-settings input {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 20vh;
+    height: 7vh;
+    font-size: 3vh;
+    color: white;
+    text-align: center;
+    border: 0.3vh solid white;
+    border-radius: 1vh;
+}
+
+/* Default Außenlinie bei Auswahl entfernen*/
+.betting-settings input:focus {
+    outline: none;
+}
+
+/* Wettformular-Button */
+.betting-settings button {
+    width: 20vh;
+    height: 7vh;
+    font-size: 3vh;
+    border: none;
+    background-color: goldenrod;
+    color: white;
+    font-weight: bold;
+    border-radius: 1vh;
+    cursor: pointer;
+    transition: scale 0.1s;
+}
+
+/* Hovern über den Wettformular-Button */
+.betting-settings button:hover {
+    scale: 1.05;
+}
+
+/* Klicken auf den Wettformular-Button */
+.betting-settings button:active {
+    scale: 0.95;
+}
+
+/* Beschreibung im Wettformular */
+.betting-settings label {
+    font-size: 4vh;
+    color: white;
+    font-weight: bold;
+}
+
+/* Chip zum Platzieren der Wetten */
+.chip {
+    position: absolute;
+    width: 3vh;
+    height: 3vh;
+    border-radius: 50%;
+    background-color: white;
+    border: 0.5vh solid rgb(0, 106, 255);
+    z-index: 3;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+}
+
+
+
+/* Responsive Gestaltung */
 @media screen and (min-width: 1200px) {
     .roulette-table {
         width: 80vw;
@@ -21,7 +310,7 @@
     }
     .roulette-bet {
         width: 40vw;
-        height: 30vh;
+        height: 40vh;
         flex-direction: column;
     }
     .numbers-block {
@@ -54,7 +343,7 @@
     }
     .roulette-bet {
         width: 40vw;
-        height: 30vh;
+        height: 40vh;
         flex-direction: column;
     }
     .numbers-block {
@@ -84,7 +373,7 @@
 @media screen and (max-width: 1000px) {
     .roulette-table {
         width: 60vw;
-        height: 180vh;
+        height: 220vh;
         justify-content: center;
         flex-direction: column;
     }
@@ -116,259 +405,4 @@
     .betting-row-item span {
         writing-mode: vertical-rl;
     }
-}
-
-.roulette-heading {
-    position: absolute;
-    top: 2vh;
-    color: white;
-    font-size: 4vh;
-    font-weight: bold;
-}
-
-.roulette-wheel, .roulette-ball {
-    width: 50vh;
-    height: 50vh;
-    border-radius: 50vh;
-    
-}
-
-.roulette-ball {
-    transform: rotateZ(4deg);
-}
-
-.roulette-wheel {
-    outline: 0.3vh solid black;
-    border: 1vh solid gold;
-    transform: rotateZ(-4deg);
-    background: 
-    conic-gradient(
-        green 0deg 9.47deg, red 9.47deg 18.94deg,
-        black 18.94deg 28.41deg, red 28.41deg 37.88deg,
-        black 37.88deg 47.35deg, red 47.35deg 56.82deg,
-        black 56.82deg 66.29deg, red 66.29deg 75.76deg,
-        black 75.76deg 85.23deg, red 85.23deg 94.7deg,
-        black 94.7deg 104.17deg, red 104.17deg 113.64deg,
-        black 113.64deg 123.11deg, red 123.11deg 132.58deg,
-        black 132.58deg 142.05deg, red 142.05deg 151.52deg,
-        black 151.52deg 160.99deg, red 160.99deg 170.46deg,
-        black 170.46deg 179.93deg, green 179.93deg 189.4deg,
-        black 189.4deg 198.87deg, red 198.87deg 208.34deg,
-        black 208.34deg 217.81deg, red 217.81deg 227.28deg,
-        black 227.28deg 236.75deg, red 236.75deg 246.22deg,
-        black 246.22deg 255.69deg, red 255.69deg 265.16deg,
-        black 265.16deg 274.63deg, red 274.63deg 284.1deg,
-        black 284.1deg 293.57deg, red 293.57deg 303.04deg,
-        black 303.04deg 312.51deg, red 312.51deg 321.98deg,
-        black 321.98deg 331.45deg, red 331.45deg 340.92deg,
-        black 340.92deg 350.39deg, red 350.39deg 360deg
-    );
-}
-
-.roulette-numbers {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
-}
-
-.roulette-number {
-    position: absolute;
-    transform-origin: center center;
-    font-size: 2vh;
-    font-weight: bold;
-    color: white;
-}
-
-.roulette-wheel-small {
-    background: repeating-conic-gradient(gold 0deg 0.7deg, transparent 0.7deg 9.47deg);
-    background-color: green;
-    width: 40vh;
-    height: 40vh;
-    border-radius: 50vh;
-    margin-top: 4.7vh;
-    margin-left: 4.7vh;
-    border: 0.3vh solid black;
-    position: absolute;
-    transform: rotate(-0.5deg);
-}
-
-.roulette-wheel-smaller {
-    background-color: goldenrod;
-    width: 30vh;
-    height: 30vh;
-    border-radius: 50vh;
-    margin-top: 9.7vh;
-    margin-left: 9.7vh;
-    border: 0.3vh solid black;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.roulette-wheel-smaller img {
-    width: 70%;
-    height: 70%;
-    transform: rotateZ(5deg);
-}
-
-
-.ball {
-    background-color: rgb(255, 255, 255);
-    width: 2vh;
-    height: 2vh;
-    justify-self: center;
-    border-radius: 5vh;
-}
-
-.roulette-bet {
-    display: flex;
-}
-
-.numbers-block {
-    flex: 1;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-}
-
-.numbers-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-
-.number {
-    flex: 1;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.2vh;
-    font-weight: bold;
-    color: white;
-    outline: 0.3vh solid white;
-    cursor: pointer;
-}
-
-.number span {
-    align-self: center;
-    text-align: center;
-    width: 100%;
-}
-
-.colors-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.betting-row {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
-.betting-row-red {
-    width: 70%;
-    height: 70%;
-    border-radius: 0.5vh;
-    background-color: red;
-}
-
-.betting-row-black {
-    width: 70%;
-    height: 70%;
-    border-radius: 0.5vh;
-    background-color: black;
-}
-
-.betting-row-item {
-    flex: 1;
-    outline: 0.3vh solid white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.3vh;
-    font-weight: bold;
-    color: white;
-    cursor: pointer;
-}
-
-
-
-.betting-settings form{
-    position: absolute;
-    width: 40vw;
-    height: 10vh;
-    bottom: 1vh;
-    right: 15vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 2vw;
-    align-items: center;
-}
-
-.betting-settings input {
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 10vh;
-    height: 5vh;
-    font-size: 2.5vh;
-    color: white;
-    text-align: center;
-    border: 0.3vh solid white;
-    border-radius: 1vh;
-}
-
-.betting-settings input:focus {
-    outline: none;
-}
-
-.betting-settings button {
-    width: 15vh;
-    height: 5vh;
-    font-size: 2.5vh;
-    border: none;
-    background-color: goldenrod;
-    color: white;
-    font-weight: bold;
-    border-radius: 1vh;
-    cursor: pointer;
-    transition: scale 0.1s;
-}
-
-.betting-settings button:hover {
-    scale: 1.05;
-}
-
-.betting-settings button:active {
-    scale: 0.95;
-}
-
-.betting-settings label {
-    font-size: 3vh;
-    color: white;
-    font-weight: bold;
-}
-
-.chip {
-    position: absolute;
-    width: 2vh;
-    height: 2vh;
-    border-radius: 50%;
-    background-color: white;
-    border: 0.5vh solid rgb(0, 106, 255);
-    z-index: 3;
-    display: flex;
-    justify-self: center;
-    align-self: center;
 }
