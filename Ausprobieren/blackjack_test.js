@@ -45,6 +45,12 @@ function formatCards(cards) {
 function updateUIPlayer() {
     const playerContainer = document.getElementById("player-cards");
     playerContainer.innerHTML = ""; // Vorherigen Inhalt löschen
+    if (canSplit() === false) {
+        splitButton.disabled = true;
+    }
+    else {
+        splitButton.disabled = false;
+    }
     playerHands.forEach((hand, index) => {
         const handDiv = document.createElement("div");
         let label = "Hand " + (index + 1);
@@ -179,11 +185,11 @@ let playerHands = [[0][0]];
 let currentHandIndex = 0;
 
 function canSplit() {
-    return playerCards.length === 2 && playerCards[0].value === playerCards[1].value;
+    return playerHands[currentHandIndex].length === 2 && playerHands[currentHandIndex][0].value === playerHands[currentHandIndex][1].value;
 }
 
 function canDouble() {
-    return playerCards.length === 2;
+    return playerHands[currentHandIndex].length === 2;
 }
 
 document.getElementById("start").addEventListener("click", function() {
@@ -224,6 +230,12 @@ function switchToNextHand() {
         currentHandIndex++;
         playerCards = playerHands[currentHandIndex];
         updateUIPlayer();
+        if (canSplit() === false) {
+            splitButton.disabled = true;
+        }
+        else {
+            splitButton.disabled = false;
+        }
     } else {
         document.getElementById("stand").click();
     }
