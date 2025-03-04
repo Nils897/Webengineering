@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    fetch('path/to/userData.json')
+    fetch('../../Data/sampleUser.json')
         .then(response => response.json())
         .then(data => {
             // Setze die Benutzerdaten in die entsprechenden span-Elemente
