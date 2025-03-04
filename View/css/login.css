@@ -1,3 +1,13 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center; /* Zentriert horizontal */
+    align-items: center; /* Zentriert vertikal */
+    height: 100vh; /* Volle Höhe des Viewports */
+    background-color: #333;
+}
+
 #login {
     display: flex;
     flex-direction: column;
@@ -7,8 +17,8 @@
     padding: 20px 30px;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    width: 100%; /* Sicherstellen, dass der Container die volle Breite nutzt */
-    max-width: 400px; /* Maximalbreite für den Login-Container */
+    width: 100%; /* Maximale Breite für den Container */
+    max-width: 400px; /* Maximale Breite des Containers */
 }
 
 .form-group {
