@@ -14,6 +14,7 @@ header {
     position: fixed;
     width: 100%;
     left: 0;
+    z-index: 1000; /* Stellt sicher, dass der Header immer im Vordergrund ist */
 }
 
 .logo img {
@@ -50,5 +51,5 @@ nav ul li a:last-child {
 }
 
 nav ul li a:hover {
-    color: gold;
+    color: gold; /* Hover-Effekt in Gold */
 }
