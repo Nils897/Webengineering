@@ -58,9 +58,9 @@ function getVisibleImage(reelContainer) {
 }
 
 function spin() {
+    document.getElementById("output").innerText = "";
     const reels = document.querySelectorAll(".reel");
     let chosenReels = [];
-    let count = 0;
     reels.forEach((reel, index) => {
         let duration = Math.random() * 2 + 1;
         reel.style.animation = `spinLoop ${duration}s infinite linear`;
@@ -70,11 +70,48 @@ function spin() {
             reel.style.transform = `translateY(${stopPosition}px)`;
             let reelContainer = reel.parentElement;
             chosenReels.push(getVisibleImage(reelContainer));
-            count++;
-            if (count === chosenReels.length) {
+            if (chosenReels.length === 5) {
                 console.log(`Index: ${index} ${chosenReels}`);
+                getResultOfSpin(chosenReels);
             }
         }, (Math.random() * 2 + 2) * 1000 );
     });
-    console.log(chosenReels);
+}
+
+function getResultOfSpin(chosenReels) {
+    const counts = chosenReels.reduce((akk, num) => {
+        akk[num] = (akk[num] || 0) + 1;
+        return akk;
+    }, {});
+
+    let maxNum = null;
+    let maxCount = 0;
+
+    for (const [num, count] of Object.entries(counts)) {
+        if (count > maxCount) {
+            maxNum = num;
+            maxCount = count;
+        }
+    }
+    getAnswerString(maxCount);
+}
+
+function getAnswerString(maxCount) {
+    switch(maxCount) {
+        case 2:
+            document.getElementById("output").innerText = "2 Symbole sind gleich"
+            break;
+        case 3:
+            document.getElementById("output").innerText = "3 Symbole sind gleich"
+            break;
+        case 4:
+            document.getElementById("output").innerText = "4 Symbole sind gleich"
+            break;
+        case 5:
+            document.getElementById("output").innerText = "5 Symbole sind gleich"
+            break;
+        default:
+            document.getElementById("output").innerText = "Keine Symbole sind gleich"
+            break;
+    }
 }
