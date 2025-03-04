@@ -1,13 +1,3 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #333;
-}
-
 #login {
     display: flex;
     flex-direction: column;
@@ -17,13 +7,8 @@ body {
     padding: 20px 30px;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: 400px; /* Maximale Breite für das Login-Formular */
-}
-
-fieldset {
-    border: none;
-    width: 100%;
+    width: 100%; /* Sicherstellen, dass der Container die volle Breite nutzt */
+    max-width: 400px; /* Maximalbreite für den Login-Container */
 }
 
 .form-group {
@@ -41,7 +26,7 @@ label {
 
 input {
     flex: 1;
-    max-width: 300px;
+    max-width: 100%; /* Flexibel, damit die Eingabefelder die ganze Breite nutzen */
     padding: 8px;
     border: none;
     border-radius: 5px;
@@ -49,7 +34,7 @@ input {
 
 #loginButton {
     display: block;
-    width: 100%;
+    width: 100%; /* Button soll die volle Breite des Containers einnehmen */
     background-color: #ff6606;
     color: white;
     border: none;
@@ -58,12 +43,8 @@ input {
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s;
-    align-items: center;
 }
 
 #loginButton:hover {
     background-color: #ff8c3f;
 }
-
-
-
