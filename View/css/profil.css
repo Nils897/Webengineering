@@ -1,0 +1,76 @@
+/* Allgemeiner Body-Stil */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #333; /* Dunkler Hintergrund wie beim Anmeldefenster */
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+/* Profil-Container */
+#profile {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #5a5656; /* Hintergrundfarbe wie beim Anmeldefenster */
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Weicherer Schatten */
+}
+
+/* Profil-Überschrift */
+#profile h1 {
+    text-align: center;
+    color: white; /* Weiße Schriftfarbe für den Titel */
+    font-size: 24px;
+    margin-bottom: 20px; /* Abstand unter der Überschrift */
+}
+
+/* Benutzerdetails Container */
+#userDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Etwas mehr Abstand zwischen den Zeilen */
+    width: 100%;
+    margin-bottom: 30px; /* Abstand zum unteren Bereich */
+}
+
+/* Benutzerdetails Paragraph */
+#userDetails p {
+    display: flex;
+    font-size: 16px;
+    margin: 0;
+}
+
+/* Stile für die Bezeichner */
+#userDetails strong {
+    width: 150px; /* Feste Breite für die Bezeichner */
+    text-align: left;
+    font-weight: bold;
+    /* Weiße Schriftfarbe für die Bezeichner */
+}
+
+/* Stile für die Daten */
+#userDetails span {
+    flex: 1;
+    text-align: left;
+    color: white; /* Weiße Schriftfarbe für die Daten */
+}
+
+/* Button zum Bearbeiten des Profils */
+#editProfileButton {
+    display: block;
+    width: 100%;
+    background-color: #ff6606; /* Orangefarbener Hintergrund wie beim Anmeldefenster */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Hover-Effekt für den Button */
+#editProfileButton:hover {
+    background-color: #ff8c3f; /* Helleres Orange bei Hover */
+}
