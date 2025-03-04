@@ -5,6 +5,29 @@ body {
     color: white;
 }
 
+.slot-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: black;
+    padding: 30px;
+    border: 10px solid gold;
+    border-radius: 15px;
+    box-shadow: 0 0 20px gold;
+}
+
+.reel-container {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border: 2px solid white;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
 .slot-machine {
     display: flex;
     justify-content: center;
@@ -14,15 +37,25 @@ body {
 }
 
 .reel {
+    overflow: hidden;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: center;
+    top: 0;
+    animation: spinLoop 6s linear infinite;
+}
+
+.symbol {
     width: 80px;
     height: 80px;
-    overflow: hidden;
-    border: 3px solid #ffffff;
-    background: black;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 30px;
+    background: black;
+    color: white;
 }
 
 button {
@@ -39,4 +72,9 @@ button {
 @keyframes spin {
     0% { transform: translateY(-100%); opacity: 0; }
     100% { transform: translateY(0%); opacity: 1; }
+}
+
+@keyframes spinLoop {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-800px); }
 }
