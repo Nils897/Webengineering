@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+function initProfile() {
     fetch('../../Data/sampleUser.json')
         .then(response => response.json())
         .then(data => {
@@ -12,4 +12,11 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('credits').textContent = data.credits + ' Credits';
         })
         .catch(error => console.error('Fehler beim Laden der Benutzerdaten:', error));
-});
+}
+
+// Überprüfen, ob das DOM bereits geladen wurde oder noch geladen wird
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProfile);
+} else {
+    initProfile();
+}
