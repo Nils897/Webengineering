@@ -23,8 +23,8 @@ function createReels(reelElement) {
         let symbolLink = symbols[i % symbols.length];
         img.src = symbolLink;
         img.alt = getAltOfImage(symbolLink);
-        img.width = 80;
-        img.height = 80;
+        img.width = 100;
+        img.height = 100;
         container.appendChild(img);
         reelElement.appendChild(container);
     }
@@ -36,7 +36,7 @@ function getAltOfImage(imgLink) {
 }
 
 function getRandomSymbolOffset() {
-    return Math.floor(Math.random() * 14) * -80;
+    return Math.floor(Math.random() * 14) * -100;
 }
 
 function getVisibleImage(reelContainer) {
@@ -62,7 +62,7 @@ function spin() {
     const reels = document.querySelectorAll(".reel");
     let chosenReels = [];
     reels.forEach((reel, index) => {
-        let duration = Math.random() * 2 + 1;
+        let duration = Math.random() * 2;
         reel.style.animation = `spinLoop ${duration}s infinite linear`;
         setTimeout(() => {
             reel.style.animation = "none";
