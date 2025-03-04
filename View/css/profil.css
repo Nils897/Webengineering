@@ -1,25 +1,33 @@
 /* Allgemeiner Body-Stil */
 body {
     font-family: Arial, sans-serif;
-    background-color: #333; /* Dunkler Hintergrund wie beim Anmeldefenster */
+    background-color: #333; /* Dunkler Hintergrund als Fallback */
+    background-image: url('../img/Designer.jpeg'); /* Hintergrundbild */
+    background-size: cover; /* Bild füllt den gesamten Bereich */
+    background-position: center; /* Bild bleibt zentriert */
+    background-attachment: fixed; /* Bild bleibt fixiert beim Scrollen */
     margin: 0;
     padding: 0;
     color: white;
+    /* Zentriere den Inhalt sowohl horizontal als auch vertikal */
+    display: flex;
+    justify-content: center; /* Horizontal zentrieren */
+    align-items: center; /* Vertikal zentrieren */
+    height: 100vh; /* Der Body nimmt die gesamte Bildschirmhöhe ein */
 }
 
 /* Profil-Container */
 #profile {
     max-width: 600px;
-    margin: 50px auto;
     padding: 30px;
-    background-color: #5a5656; /* Hintergrundfarbe wie beim Anmeldefenster */
+    background-color: rgba(90, 86, 86, 0.8); /* Leicht durchsichtiger Hintergrund */
     border-radius: 8px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Weicherer Schatten */
+    text-align: center; /* Zentriere den Text im Profilbereich */
 }
 
 /* Profil-Überschrift */
 #profile h1 {
-    text-align: center;
     color: white; /* Weiße Schriftfarbe für den Titel */
     font-size: 24px;
     margin-bottom: 20px; /* Abstand unter der Überschrift */
@@ -39,6 +47,7 @@ body {
     display: flex;
     font-size: 16px;
     margin: 0;
+    justify-content: center; /* Zentriere die Bezeichner und Daten innerhalb der Zeile */
 }
 
 /* Stile für die Bezeichner */
@@ -46,7 +55,7 @@ body {
     width: 150px; /* Feste Breite für die Bezeichner */
     text-align: left;
     font-weight: bold;
-    /* Weiße Schriftfarbe für die Bezeichner */
+    color: white; /* Weiße Schriftfarbe für die Bezeichner */
 }
 
 /* Stile für die Daten */
