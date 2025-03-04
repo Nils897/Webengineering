@@ -74,6 +74,14 @@ function determineGroup(number) {
         oddNumbers.push(number.toString());
     }
 
+    //füllen der 1-18/19-36 Felder
+    if (number <= 18){
+        firstHalf.push(number.toString());
+    }
+    else {
+        secondHalf.push(number.toString());
+    }
+
 }
 
 function placeBettingField(){
@@ -159,6 +167,7 @@ function spinBall(number) {
     // Kugel macht 5 Runden, bevor er auf der richtigen Zahl stehenbleibt
     let angle = 9.47 * numbers.indexOf(number) + 4.5;
     angle = angle + 360 * 5;
+    const duration = angle * (1000 / 360);
     const spinningBall = [
         { transform: `rotate(${0}deg)`, scale: 1 },
         { transform: `rotate(${angle}deg)`, scale: 0.8 }
@@ -166,13 +175,14 @@ function spinBall(number) {
 
     // Kugel braucht 1s pro Umdrehung und wird immer langsamer
     const spinningBallTiming = {
-        duration: angle * (1000 / 360),
+        duration: duration,
         iterations: 1,
         easing: 'ease-out' 
     }
     rouletteBall.animate(spinningBall, spinningBallTiming);
     rouletteBall.style.transform = `rotate(${angle}deg)`;
     rouletteBall.style.scale = 0.8;
+    return duration;
 }
 
 
@@ -214,12 +224,56 @@ function bet(numbers, id) {
     });
 }
 
+function getWinningNumber(){
+    /* Gibt ein zufälliges Element aus dem numbers array zurück */
+    let winnerIndex = Math.floor(Math.random() * numbers.length);
+    return numbers[winnerIndex];
+}
+
+function getWinningAmount(amount, betLength){
+    /* berechnet den Gewinn im Verhältnis zum Einsatz */
+    if (betLength === 18){
+        return 2 * amount;
+    }
+    if (betLength === 12) {
+        return 3 * amount;
+    }
+    if(betLength === 1){
+        return 36 * amount;
+    }
+}
+
+function winningText(winAmount, win){
+    /* stellt Gewinn/Verlust nach dem Spiel dar */
+    const bettingSettings = document.querySelector('.betting-settings');
+    if(win){
+        bettingSettings.innerHTML = `
+            <p>Du hast <span class="win-amount">${winAmount} Credits</span> gewonnen!</p>
+            `
+    }
+    else {
+        bettingSettings.innerHTML = `
+            <p>Du hast <span class="lose-amount">${winAmount} Credits</span> verloren!</p>
+            `
+    }
+    
+}
 
 function game(numbers, amount){
     /* bekommt gewinnende Zahl aus dem Backend und dreht die Kugel */
     document.querySelector('.betting-settings').innerHTML = '';
-    //interaktion mit backend hier
-    spinBall(numbers[0]);
+    let winningNumber = getWinningNumber();
+    let duration = spinBall(winningNumber);
+    setTimeout(() => {
+        if(numbers.includes(winningNumber)){
+            winningAmount = getWinningAmount(amount, numbers.length);
+            winningText(winningAmount, true);
+        }
+        else {
+            winningText(amount, false);
+        }
+        document.querySelector('.chip').remove();
+    }, duration);
 }
 
 function startRoulette(){
