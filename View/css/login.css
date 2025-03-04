@@ -5,14 +5,17 @@ body {
     justify-content: center; /* Zentriert horizontal */
     align-items: center; /* Zentriert vertikal */
     height: 100vh; /* Volle Höhe des Viewports */
-    background-color: #333;
+    background-image: url('../img/Designer.jpeg'); /* Hintergrundbild */
+    background-size: cover; /* Bild füllt den gesamten Bereich */
+    background-position: center;
+    background-attachment: fixed; /* Fixiert das Hintergrundbild */
 }
 
 #login {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #5a5656;
+    background-color: rgba(90, 86, 86, 0.8); /* Halbtransparenter Hintergrund für bessere Lesbarkeit */
     color: white;
     padding: 20px 30px;
     border-radius: 8px;

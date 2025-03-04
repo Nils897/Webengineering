@@ -2,21 +2,26 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #333;
+    justify-content: center; /* Zentriert horizontal */
+    align-items: center; /* Zentriert vertikal */
+    height: 100vh; /* Volle Höhe des Viewports */
+    background-image: url('../img/Designer.jpeg'); /* Hintergrundbild */
+    background-size: cover; /* Bild füllt den gesamten Bereich */
+    background-position: center;
+    background-attachment: fixed; /* Fixiert das Hintergrundbild */
 }
 
 #registration {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #5a5656;
+    background-color: rgba(90, 86, 86, 0.8); /* Halbtransparenter Hintergrund für bessere Lesbarkeit */
     color: white;
     padding: 20px 30px;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    width: 100%; /* Maximale Breite für den Container */
+    max-width: 400px; /* Maximale Breite des Containers */
 }
 
 .form-group {
@@ -34,7 +39,7 @@ label {
 
 input {
     flex: 1;
-    max-width: 300px;
+    max-width: 300px; /* Maximale Breite der Eingabefelder */
     padding: 8px;
     border: none;
     border-radius: 5px;
@@ -42,7 +47,7 @@ input {
 
 #registrationButton {
     display: block;
-    width: 100%;
+    width: 100%; /* Button soll die volle Breite des Containers einnehmen */
     background-color: #ff6606;
     color: white;
     border: none;
