@@ -1,5 +1,15 @@
 function loadLayout() {
-    fetch("headerNoLogIn.html")
+    // Überprüfe, ob der Benutzer eingeloggt ist
+    localStorage.setItem("isLoggedIn", "true"); // für anmelden
+    // für abmelden: localStorage.removeItem("isLoggedIn");
+
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    // Wähle den Header je nach Login-Zustand
+    const headerFile = isLoggedIn ? "headerLoggedIn.html" : "headerNoLogIn.html";
+
+    // Lade den Header
+    fetch(headerFile)
         .then(response => response.text())
         .then(data => {
             document.getElementById("header").innerHTML = data;
@@ -7,6 +17,7 @@ function loadLayout() {
         })
         .catch(error => console.error("Fehler beim Laden des Headers:", error));
 
+    // Lade den Footer
     fetch("footer.html")
         .then(response => response.text())
         .then(data => document.getElementById("footer").innerHTML = data)
