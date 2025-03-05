@@ -10,6 +10,9 @@ const star =  "../View/img/slot_machine_img/star.png";
 const dice =  "../View/img/slot_machine_img/dice.png";
 const symbols = [diamant, flame, bell, heart , card, star, cloverleaf, dice, moneybag, cherry];
 
+//Button disablen während drehen und danach wieder enablen
+
+
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".reel").forEach(reel => createReels(reel));
 });

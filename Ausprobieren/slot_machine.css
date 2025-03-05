@@ -36,7 +36,17 @@ body {
     left: -20px;
     right: -20px;
     bottom: -20px;
-    pointer-events: none;
+}
+
+.circles-upper-element::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 30px dotted gold;
+    border-top-left-radius: 500px 200px;
+    border-top-right-radius: 500px 200px;
+    animation: blink 0.5s infinite alternate;
 }
 
 .jackpot-text {
@@ -46,6 +56,7 @@ body {
     color: gold;
     font-size: 100pt;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .slot-machine-lower-element {
@@ -70,7 +81,7 @@ body {
     left: -20px;
     right: -20px;
     bottom: -20px;
-    pointer-events: none;
+    gap: 10px;
 }
 
 .circles-lower-element::before {
@@ -102,20 +113,12 @@ body {
     width: 100px;
     height: 100px;
     overflow: hidden;
-    border: 2px solid white;
+    border: 20px solid #951515;
     background: #222;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-}
-
-.slot-machine1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 100px;
 }
 
 .reel {
@@ -140,20 +143,11 @@ body {
     color: white;
 }
 
-button {
+.spin-button {
     margin: 20px;
     padding: 10px 20px;
     font-size: 1.2rem;
     cursor: pointer;
-}
-
-.spin {
-    animation: spin 1s ease-out;
-}
-
-@keyframes spin {
-    0% { transform: translateY(-100%); opacity: 0; }
-    100% { transform: translateY(0%); opacity: 1; }
 }
 
 @keyframes spinLoop {
