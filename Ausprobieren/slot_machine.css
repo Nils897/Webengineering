@@ -5,6 +5,99 @@ body {
     color: white;
 }
 
+.slot-machine {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.slot-machine-upper-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    width: 800px;
+    height: 300px;
+    background-color: #000000;
+    border: 80px solid #951515;
+    border-bottom: none;
+    border-top-left-radius: 500px 200px;
+    border-top-right-radius: 500px 200px;
+}
+
+.circles-upper-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+}
+
+.circles-upper-element::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 30px dotted gold;
+    border-top-left-radius: 500px 200px;
+    border-top-right-radius: 500px 200px;
+    animation: blink 0.5s infinite alternate;
+}
+
+.jackpot-text {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: gold;
+    font-size: 100pt;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.slot-machine-lower-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 1000px;
+    height: 600px;
+    background-color: #000000;
+    border: 80px solid #951515;
+    border-radius: 50px;
+    gap: 20px;
+}
+
+.circles-lower-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    gap: 10px;
+}
+
+.circles-lower-element::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 30px dotted gold;
+    animation: blink 0.5s infinite alternate;
+}
+
+@keyframes blink {
+    0% { opacity: 0.2; }
+    100% { opacity: 1; }
+}
+
 .slot-container {
     display: flex;
     flex-direction: column;
@@ -17,23 +110,15 @@ body {
 }
 
 .reel-container {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     overflow: hidden;
-    border: 2px solid white;
+    border: 20px solid #951515;
     background: #222;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-}
-
-.slot-machine {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 100px;
 }
 
 .reel {
@@ -48,8 +133,8 @@ body {
 }
 
 .symbol {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,23 +143,14 @@ body {
     color: white;
 }
 
-button {
+.spin-button {
     margin: 20px;
     padding: 10px 20px;
     font-size: 1.2rem;
     cursor: pointer;
 }
 
-.spin {
-    animation: spin 1s ease-out;
-}
-
-@keyframes spin {
-    0% { transform: translateY(-100%); opacity: 0; }
-    100% { transform: translateY(0%); opacity: 1; }
-}
-
 @keyframes spinLoop {
     0% { transform: translateY(0); }
-    100% { transform: translateY(-800px); }
+    100% { transform: translateY(-1000px); }
 }

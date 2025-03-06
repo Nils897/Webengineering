@@ -1,0 +1,20 @@
+[
+  {
+    "firstName": "Philipp",
+    "lastName": "Staudinger",
+    "username": "philipp",
+    "password": "#Hallo123",
+    "gender": "male",
+    "interest": "HTML5",
+    "comments": "ich freue mich auf diese website"
+  },
+  {
+    "firstName": "fghjkl",
+    "lastName": "nein",
+    "username": "hallo",
+    "password": "#Hallo123",
+    "gender": "male",
+    "interest": "JavaScript",
+    "comments": ""
+  }
+]
