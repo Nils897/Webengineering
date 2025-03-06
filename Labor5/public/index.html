@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Web Engineering</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Willkommen bei Web Engineering</h1>
+    <form id="loginForm">
+        <label for="username">Benutzername:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Passwort:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+    <p>Noch keinen Account? <a href="register.html">Hier registrieren</a></p>
+    <div id="loginMessage"></div>
+</div>
+<script src="js/login.js"></script>
+</body>
+</html>
