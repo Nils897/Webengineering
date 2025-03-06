@@ -1,17 +1,14 @@
-const diamant = "../View/img/slot_machine_img/diamant.png";
-const flame =  "../View/img/slot_machine_img/flame.png";
-const moneybag = "../View/img/slot_machine_img/moneybag.png";
-const bell =  "../View/img/slot_machine_img/bell.png";
-const heart =   "../View/img/slot_machine_img/heart.png";
-const card =  "../View/img/slot_machine_img/card.png";
-const cherry = "../View/img/slot_machine_img/cherry.png";
-const cloverleaf =  "../View/img/slot_machine_img/cloverleaf.png";
-const star =  "../View/img/slot_machine_img/star.png";
-const dice =  "../View/img/slot_machine_img/dice.png";
+const diamant = "img/slotmachineSymbols/diamant.png";
+const flame =  "img/slotmachineSymbols/flame.png";
+const moneybag = "img/slotmachineSymbols/moneybag.png";
+const bell =  "img/slotmachineSymbols/bell.png";
+const heart =   "img/slotmachineSymbols/heart.png";
+const card =  "img/slotmachineSymbols/card.png";
+const cherry = "img/slotmachineSymbols/cherry.png";
+const cloverleaf =  "img/slotmachineSymbols/cloverleaf.png";
+const star =  "img/slotmachineSymbols/star.png";
+const dice =  "img/slotmachineSymbols/dice.png";
 const symbols = [diamant, flame, bell, heart , card, star, cloverleaf, dice, moneybag, cherry];
-
-//Button disablen während drehen und danach wieder enablen
-
 
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".reel").forEach(reel => createReels(reel));
@@ -35,7 +32,7 @@ function createReels(reelElement) {
 
 function getAltOfImage(imgLink) {
     let parts = imgLink.split("/");
-    return parts[4];
+    return parts[2];
 }
 
 function getRandomSymbolOffset() {
@@ -61,6 +58,8 @@ function getVisibleImage(reelContainer) {
 }
 
 function spin() {
+    let shouldClickAvailabe = false;
+    changeClickEventFromButton(shouldClickAvailabe);
     document.getElementById("output").innerText = "";
     const reels = document.querySelectorAll(".reel");
     let chosenReels = [];
@@ -76,9 +75,20 @@ function spin() {
             if (chosenReels.length === 5) {
                 console.log(`Index: ${index} ${chosenReels}`);
                 getResultOfSpin(chosenReels);
+                shouldClickAvailabe = true;
+                changeClickEventFromButton(shouldClickAvailabe);
             }
         }, (Math.random() * 2 + 2) * 1000 );
     });
+}
+
+function changeClickEventFromButton(shouldClickAvailable) {
+    if (shouldClickAvailable) {
+        document.getElementById("spinButton").setAttribute("onclick", "spin()");
+    }
+    else {
+        document.getElementById("spinButton").removeAttribute("onclick");
+    }
 }
 
 function getResultOfSpin(chosenReels) {

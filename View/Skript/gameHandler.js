@@ -58,7 +58,7 @@ function startGame(game) {
                 setTimeout(() => {
                     gameView.innerHTML = `
                     <button class="close-button">&#10006;</button>
-                    <iframe src="./games/slot-machine.html"></iframe>
+                    <iframe src="./games/slotmachine.html"></iframe>
                     `;
                     //Spiel schließen bei Klicken auf den close-Button
                     document.querySelector(".close-button").addEventListener("click", () => {
