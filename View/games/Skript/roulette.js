@@ -186,7 +186,10 @@ function placeChip(id){
 }
 
 function bet(numbers, id) {
-    /* Lässt den Nutzer einen Einsatz platzieren */
+    /* Lässt den Nutzer einen Einsatz platzieren.
+       Neu: Falls bereits ein Wettformular offen ist, wird kein weiteres geöffnet. */
+    if (document.getElementById('bet-form')) return;
+
     const bettingSettings = document.querySelector('.betting-settings');
     bettingSettings.innerHTML = `
     <form id="bet-form">
@@ -265,17 +268,13 @@ function game(){
         activeBets.forEach(bet => {
             if(bet.numbers.includes(winningNumber)){
                 totalWin += getWinningAmount(bet.amount, bet.numbers.length);
-
             }
-
-            totalWin -= bet.amount
-
-
+            totalWin -= bet.amount;
         });
         if(totalWin > 0){
             winningText(totalWin, true);
         } else {
-            let totalBet = -totalWin         //activeBets.reduce((sum, bet) => sum + bet.amount, 0);
+            let totalBet = -totalWin;
             winningText(totalBet, false);
         }
         // Entferne alle Chips vom Spielfeld
