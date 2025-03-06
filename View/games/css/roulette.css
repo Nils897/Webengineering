@@ -39,7 +39,7 @@ body {
 /* Container für die Kugel */
 .roulette-ball {
     transform: rotateZ(4deg);
-    display: block;
+    display: grid;
 }
 
 /* Äußerer Bereich des Roulette-Rads */
