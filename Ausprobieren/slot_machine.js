@@ -10,6 +10,9 @@ const star =  "../View/img/slot_machine_img/star.png";
 const dice =  "../View/img/slot_machine_img/dice.png";
 const symbols = [diamant, flame, bell, heart , card, star, cloverleaf, dice, moneybag, cherry];
 
+//Button disablen während drehen und danach wieder enablen
+
+
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".reel").forEach(reel => createReels(reel));
 });
@@ -23,8 +26,8 @@ function createReels(reelElement) {
         let symbolLink = symbols[i % symbols.length];
         img.src = symbolLink;
         img.alt = getAltOfImage(symbolLink);
-        img.width = 80;
-        img.height = 80;
+        img.width = 100;
+        img.height = 100;
         container.appendChild(img);
         reelElement.appendChild(container);
     }
@@ -36,7 +39,7 @@ function getAltOfImage(imgLink) {
 }
 
 function getRandomSymbolOffset() {
-    return Math.floor(Math.random() * 14) * -80;
+    return Math.floor(Math.random() * 14) * -100;
 }
 
 function getVisibleImage(reelContainer) {
@@ -58,11 +61,11 @@ function getVisibleImage(reelContainer) {
 }
 
 function spin() {
+    document.getElementById("output").innerText = "";
     const reels = document.querySelectorAll(".reel");
     let chosenReels = [];
-    let count = 0;
     reels.forEach((reel, index) => {
-        let duration = Math.random() * 2 + 1;
+        let duration = Math.random() * 2;
         reel.style.animation = `spinLoop ${duration}s infinite linear`;
         setTimeout(() => {
             reel.style.animation = "none";
@@ -70,11 +73,48 @@ function spin() {
             reel.style.transform = `translateY(${stopPosition}px)`;
             let reelContainer = reel.parentElement;
             chosenReels.push(getVisibleImage(reelContainer));
-            count++;
-            if (count === chosenReels.length) {
+            if (chosenReels.length === 5) {
                 console.log(`Index: ${index} ${chosenReels}`);
+                getResultOfSpin(chosenReels);
             }
         }, (Math.random() * 2 + 2) * 1000 );
     });
-    console.log(chosenReels);
+}
+
+function getResultOfSpin(chosenReels) {
+    const counts = chosenReels.reduce((akk, num) => {
+        akk[num] = (akk[num] || 0) + 1;
+        return akk;
+    }, {});
+
+    let maxNum = null;
+    let maxCount = 0;
+
+    for (const [num, count] of Object.entries(counts)) {
+        if (count > maxCount) {
+            maxNum = num;
+            maxCount = count;
+        }
+    }
+    getAnswerString(maxCount);
+}
+
+function getAnswerString(maxCount) {
+    switch(maxCount) {
+        case 2:
+            document.getElementById("output").innerText = "2 Symbole sind gleich"
+            break;
+        case 3:
+            document.getElementById("output").innerText = "3 Symbole sind gleich"
+            break;
+        case 4:
+            document.getElementById("output").innerText = "4 Symbole sind gleich"
+            break;
+        case 5:
+            document.getElementById("output").innerText = "5 Symbole sind gleich"
+            break;
+        default:
+            document.getElementById("output").innerText = "Keine Symbole sind gleich"
+            break;
+    }
 }
