@@ -77,6 +77,7 @@ body {
     justify-content: center;
     align-items: center;
     position: absolute;
+    flex-direction: row;
     top: -20px;
     left: -20px;
     right: -20px;
@@ -96,6 +97,15 @@ body {
 @keyframes blink {
     0% { opacity: 0.2; }
     100% { opacity: 1; }
+}
+
+.condition-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    padding: 50px;
 }
 
 .slot-container {
