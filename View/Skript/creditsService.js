@@ -5,7 +5,7 @@ function getAccountCredits(){
     if (!userData) {
         console.error("Kein eingeloggter Benutzer gefunden!");
         alert("Bitte logge dich zuerst ein!");
-        window.location.href = "../../login.html"; // Zurück zur Login-Seite
+        window.location.href = "../logIn.html"; // Zurück zur Login-Seite
         return;
     }
     const user = JSON.parse(userData);
