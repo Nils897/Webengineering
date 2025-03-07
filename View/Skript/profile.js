@@ -1,20 +1,26 @@
 function initProfile() {
-    fetch("/api/login-data")
-        .then(response => response.json())
-        .then(data => {
-            // Setze die Benutzerdaten in die entsprechenden span-Elemente
-            document.getElementById('firstNameHeader').textContent = data.firstName;
-            document.getElementById('lastNameHeader').textContent = data.lastName;
-            document.getElementById('firstName').textContent = data.firstName;
-            document.getElementById('lastName').textContent = data.lastName;
-            document.getElementById('username').textContent = data.username;
-            document.getElementById('email').textContent = data.email;
-            document.getElementById('credits').textContent = data.credits + ' Credits';
-        })
-        .catch(error => console.error('Fehler beim Laden der Benutzerdaten:', error));
+    const userData = sessionStorage.getItem("loggedInUser");
+
+    if (!userData) {
+        console.error("Kein eingeloggter Benutzer gefunden!");
+        alert("Bitte logge dich zuerst ein!");
+        window.location.href = "login.html"; // Zurück zur Login-Seite
+        return;
+    }
+
+    const user = JSON.parse(userData);
+
+    // Setze die Benutzerdaten in die entsprechenden span-Elemente
+    document.getElementById("firstNameHeader").textContent = user.firstName;
+    document.getElementById("lastNameHeader").textContent = user.lastName;
+    document.getElementById("firstName").textContent = user.firstName;
+    document.getElementById("lastName").textContent = user.lastName;
+    document.getElementById("username").textContent = user.username;
+    document.getElementById("email").textContent = user.email;
+    document.getElementById("credits").textContent = user.credits + " Credits";
 }
 
-// Überprüfen, ob das DOM bereits geladen wurde oder noch geladen wird
+// Warten, bis das DOM geladen ist
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initProfile);
 } else {

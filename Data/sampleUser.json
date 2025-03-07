@@ -1,7 +1,23 @@
 {
-  "firstName": "Max",
-  "lastName": "Mustermann",
-  "username": "xXMaximiserXx",
-  "email": "max@mustermann.de",
-  "credits": 10000
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Max",
+      "lastName": "Mustermann",
+      "username": "xXMaximiserXx",
+      "email": "max@mustermann.de",
+      "password": "1234",
+      "credits": 10000
+    },
+    {
+      "id": 2,
+      "firstName": "Lisa",
+      "lastName": "Schmidt",
+      "username": "LisaLovesGames",
+      "email": "lisa@schmidt.de",
+      "password": "5678",
+      "credits": 5000
+    }
+  ]
 }
+
