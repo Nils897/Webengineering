@@ -25,5 +25,14 @@
         "email": "janne.jn.xbox@gmail.com",
         "password": "1234",
         "credits": 90
+    },
+    {
+        "id": 4,
+        "firstName": "heiland",
+        "lastName": "humus",
+        "username": "1",
+        "email": "2@1",
+        "password": "1",
+        "credits": 0
     }
 ]

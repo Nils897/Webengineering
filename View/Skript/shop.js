@@ -52,3 +52,4 @@ if (document.readyState === "loading") {
 } else {
     initShop();
 }
+
