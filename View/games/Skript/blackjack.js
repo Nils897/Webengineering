@@ -7,7 +7,10 @@ const values = [
     { name: "Bube", value: 10 }, { name: "Dame", value: 10 }, { name: "König", value: 10 },
     { name: "Ass", value: 11 }
 ];
-let Account = 100
+let Account = getAccountCredits();
+
+
+
 let handResults = [];
 
 
@@ -77,7 +80,11 @@ function end() {
     document.getElementById("hit").disabled = true;
     document.getElementById("restart").disabled = false;
     doubleButton.disabled = true;
-    deck = createDeck();
+    if (deck.length<20){
+        deck = createDeck();
+    }
+    const userData = JSON.parse(sessionStorage.getItem("loggedInUser"));
+    updateCreditsOnServer(userData.username, Account);
 }
 
 function checkGameEnd() {
@@ -269,6 +276,8 @@ document.getElementById("stand").addEventListener("click", function() {
 const AccountDisplay = document.createElement("p");
 AccountDisplay.textContent = `Konto: ${Account}€`;
 document.body.insertBefore(AccountDisplay, document.getElementById("bet"));
+
+
 
 
 

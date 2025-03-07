@@ -2,6 +2,7 @@ let rouletteBall;
 let ball;
 let wheel;
 let numbersContainer;
+let account = getAccountCredits();
 
 let activeBets = []; // Speichert alle aktiven Wetten
 
@@ -21,6 +22,7 @@ const firstHalf = [];
 const secondHalf = [];
 const oddNumbers = [];
 const evenNumbers = [];
+
 
 function addRouletteWheelNumbers(){
     /* Zahlen zu Roulette-Rad hinzufügen */
@@ -245,6 +247,8 @@ function getWinningAmount(amount, betLength){
 function winningText(winAmount, win){
     /* Zeigt den Gewinn oder Verlust an */
     const bettingSettings = document.querySelector('.betting-settings');
+    const userData = JSON.parse(sessionStorage.getItem("loggedInUser"));
+    updateCreditsOnServer(userData.username, account);
     if(win){
         bettingSettings.innerHTML = `
             <p>Du hast <span class="win-amount">${winAmount} Credits</span> gewonnen!</p>
@@ -272,9 +276,11 @@ function game(){
             totalWin -= bet.amount;
         });
         if(totalWin > 0){
+            account+=totalWin;
             winningText(totalWin, true);
         } else {
             let totalBet = -totalWin;
+            account+=totalWin;
             winningText(totalBet, false);
         }
         // Entferne alle Chips vom Spielfeld

@@ -44,4 +44,16 @@ function addUser(firstName, lastName, username, email, password) {
     return newUser; // Rückgabe des erstellten Users
 }
 
-module.exports = { loadUsers, addUser, getNextId };
+function updateCredits(username, newCredits) {
+    const users = loadUsers();
+    const user = users.find(u => u.username === username);
+    if (!user) {
+        console.error("User not found:", username);
+        return false;
+    }
+    user.credits = newCredits;
+    saveUsers(users);
+    return true;
+}
+
+module.exports = { loadUsers, addUser, getNextId, updateCredits };

@@ -45,3 +45,13 @@ exports.loginUser = async (req, res) => {
         }
     });
 };
+
+exports.writeCredits = async (req, res) => {
+    const { username, credits } = req.body;
+    const success = UserModel.updateCredits(username, credits);
+    if (success) {
+        res.json({ message: "Credits aktualisiert." });
+    } else {
+        res.status(404).json({ message: "Benutzer nicht gefunden." });
+    }
+};

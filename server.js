@@ -18,7 +18,7 @@ app.use("/api", userRoutes); // Fügen Sie diese Zeile hinzu
 // API-Route zum Abrufen von Benutzerdaten
 app.get("/api/login-data/:username", (req, res) => {
     const { username } = req.params;
-    const filePath = path.join(__dirname, "Data", "sampleUser.json");
+    const filePath = path.join(__dirname, "Data", "userData.json");
 
     fs.readFile(filePath, "utf8", (err, data) => {
         if (err) {
