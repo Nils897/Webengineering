@@ -1,5 +1,5 @@
 function initProfile() {
-    fetch('../../Data/sampleUser.json')
+    fetch('"/api/login-data"')
         .then(response => response.json())
         .then(data => {
             // Setze die Benutzerdaten in die entsprechenden span-Elemente
