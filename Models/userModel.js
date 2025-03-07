@@ -3,20 +3,45 @@ const path = require('path');
 
 const filePath = path.join(__dirname, "../Data/userData.json");
 
-function loadUser() {
-    if (!fs.existsSync(filePath)) return [];
-    const fileContent = fs.readFileSync(filePath, "utf8");
-    return JSON.parse(fileContent || "[]");
+function loadUsers() {
+    try {
+        if (!fs.existsSync(filePath)) return [];
+        const fileContent = fs.readFileSync(filePath, "utf8");
+        return JSON.parse(fileContent || "[]");
+    } catch (error) {
+        console.error("Fehler beim Laden der Benutzer:", error);
+        return [];
+    }
 }
 
-function saveUser(user) {
-    fs.writeFileSync(filePath, JSON.stringify(user, null, 4));
+function saveUsers(users) {
+    try {
+        fs.writeFileSync(filePath, JSON.stringify(users, null, 4));
+    } catch (error) {
+        console.error("Fehler beim Speichern der Benutzer:", error);
+    }
 }
 
-function addUser(username, password) {
-    const user = loadUser();
-    user.push({username, password});
-    saveUser(user);
+function getNextId() {
+    const users = loadUsers();
+    if (users.length === 0) return 1;
+    return Math.max(...users.map(u => u.id)) + 1;
 }
 
-module.exports = { loadUser, addUser };
+function addUser(firstName, lastName, username, email, password) {
+    const users = loadUsers();
+    const newUser = {
+        id: getNextId(),
+        firstName,
+        lastName,
+        username,
+        email,
+        password,
+        credits: 0
+    };
+    users.push(newUser);
+    saveUsers(users);
+    return newUser; // Rückgabe des erstellten Users
+}
+
+module.exports = { loadUsers, addUser, getNextId };

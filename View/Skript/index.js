@@ -1,46 +1,30 @@
 function loadLayout() {
-    // Überprüfe, ob der Benutzer eingeloggt ist
-    localStorage.setItem("isLoggedIn", "true"); // für anmelden
-    // für abmelden: localStorage.removeItem("isLoggedIn");
+    const userData = sessionStorage.getItem("loggedInUser"); // localStorage statt sessionStorage
+    const isLoggedIn = !!userData;
 
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-
-    // Wähle den Header je nach Login-Zustand
     const headerFile = isLoggedIn ? "headerLoggedIn.html" : "headerNoLogIn.html";
 
-    // Lade den Header
     fetch(headerFile)
         .then(response => response.text())
         .then(data => {
             document.getElementById("header").innerHTML = data;
-            setupNavLinks(); // Navigation aktivieren, nachdem der Header geladen wurde
+            setupNavLinks(); // WICHTIG: Event-Listener neu setzen
         })
-        .catch(error => console.error("Fehler beim Laden des Headers:", error));
+        .catch(error => console.error("Fehler beim Header:", error));
 
-    // Lade den Footer
     fetch("footer.html")
         .then(response => response.text())
         .then(data => document.getElementById("footer").innerHTML = data)
-        .catch(error => console.error("Fehler beim Laden des Footers:", error));
+        .catch(error => console.error("Fehler beim Footer:", error));
 }
 
+// Event-Listener für Seitenänderungen
 function setupNavLinks() {
-    const links = document.querySelectorAll("#header a[data-page]");
-    console.log("Gefundene Links:", links);
-
-    links.forEach(link => {
-        link.addEventListener("click", function (event) {
+    document.querySelectorAll("#header a[data-page]").forEach(link => {
+        link.addEventListener("click", function(event) {
             event.preventDefault();
-            const page = link.getAttribute("href");
-            console.log("Link wurde geklickt:", page); // Prüft, ob Klick erkannt wird
-
-            if (page === "index.html") {
-                console.log("Lade index.html neu...");
-                window.location.href = "index.html"; // Startseite neu laden
-            } else {
-                console.log("Lade Seite:", page);
-                loadPage(page);
-            }
+            const page = this.getAttribute("href");
+            loadPage(page);
         });
     });
 }
@@ -52,7 +36,6 @@ function loadPage(page) {
             const container = document.getElementById("content");
             container.innerHTML = data;
 
-            // Suche alle Script-Tags im geladenen Inhalt
             const scripts = container.querySelectorAll("script");
             scripts.forEach(oldScript => {
                 const newScript = document.createElement("script");
@@ -61,7 +44,6 @@ function loadPage(page) {
                 } else {
                     newScript.textContent = oldScript.textContent;
                 }
-                // Entferne das alte Script, um Doppelungen zu vermeiden
                 oldScript.parentNode.removeChild(oldScript);
                 document.body.appendChild(newScript);
             });
