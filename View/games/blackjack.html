@@ -5,18 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blackjack</title>
     <script src="../Skript/creditsService.js" defer></script>
-    <script src="Skript/blackjack.js" defer></script>
+    <script type="module" src="Skript/blackjack.js" defer></script>
+    <link rel="stylesheet" href="css/blackjack.css" />
 
 </head>
 <body>
-<h1>Blackjack</h1>
-<p id="player-cards">Spieler Karten:</p>
-<button id="hit" disabled="true">Karte ziehen</button>
-<button id="stand" disabled="true">Passen</button>
-<button id="restart" disabled="true">neustart</button>
-<button id="start">start</button>
-<p id="dealer-cards">Dealer Karten:</p>
-<p id="dealer-score">Dealer Punkte: 0</p>
-<p id="result"></p>
+    <main class="blackjack-table">
+        <section class="top-section">
+            <section class="hit-section">
+                <button id="hit" disabled="true">
+                    <img class="card" src="img/cards/card-back.svg" />
+                    <p class="hit-text">Karte ziehen</p>
+                </button>
+                <img class="new-card" src="img/cards/card-back.svg" />
+                <div class="more-options">
+                    
+                <button id="stand" disabled="true">Passen</button>
+                </div>
+            </section>
+            <section class="dealer-section">
+                <div class="dealer-cards-section">
+                    <p>Dealer:</p>
+                    <div id="dealer-cards">
+
+                    </div>
+                </div>
+                
+                <p id="dealer-score"></p>
+            </section>
+            <section class="bet-section">
+                <div id="start-buttons">
+                    <button id="restart" disabled="true">neustart</button>
+                    <button id="start">start</button>
+                </div>
+            </section>
+        </section>
+        <section class="bottom-section">
+            <!-- <h1>
+                Blackjack
+            </h1> -->
+            <div class="player-cards-section">
+                <div id="player-cards">
+                    <div class="player-hand" id="side-hand">
+                        <div class="hand-cards"></div>
+                        <div class="hand-text">
+                            <strong></strong>
+                            <p></p>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="player-hand" id="active-hand">
+                        <div class="hand-cards"></div>
+                        <div class="hand-text">
+                            <strong></strong>
+                            <p></p>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="player-hand" id="side-hand">
+                        <div class="hand-cards"></div>
+                        <div class="hand-text">
+                            <strong></strong>
+                            <p></p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <p id="result"></p>
+        </section>
+        
+    </main>
 </body>
 </html>

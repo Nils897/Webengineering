@@ -1,14 +1,15 @@
+import cards from './cards.js';
+
 // Karten-Deck mit Namen und Werten
-const suits = ["Pik", "Herz", "Karo", "Kreuz"];
+const suits = ["pik", "herz", "karo", "kreuz"];
 const values = [
     { name: "2", value: 2 }, { name: "3", value: 3 }, { name: "4", value: 4 },
     { name: "5", value: 5 }, { name: "6", value: 6 }, { name: "7", value: 7 },
     { name: "8", value: 8 }, { name: "9", value: 9 }, { name: "10", value: 10 },
-    { name: "Bube", value: 10 }, { name: "Dame", value: 10 }, { name: "König", value: 10 },
-    { name: "Ass", value: 11 }
+    { name: "bube", value: 10 }, { name: "dame", value: 10 }, { name: "koenig", value: 10 },
+    { name: "ass", value: 11 }
 ];
 let Account = getAccountCredits();
-
 
 
 let handResults = [];
@@ -46,8 +47,8 @@ function formatCards(cards) {
 
 // Aktualisierte updateUIPlayer-Funktion: Zeigt alle Hände an
 function updateUIPlayer() {
-    const playerContainer = document.getElementById("player-cards");
-    playerContainer.innerHTML = ""; // Vorherigen Inhalt löschen
+    const sideHandDivs = document.querySelectorAll("#side-hand");
+    let sideHandIndex = 0;
     if (canSplit() === false) {
         splitButton.disabled = true;
     }
@@ -55,23 +56,117 @@ function updateUIPlayer() {
         splitButton.disabled = false;
     }
     playerHands.forEach((hand, index) => {
-        const handDiv = document.createElement("div");
-        let label = "Hand " + (index + 1);
+        let handDiv;
         if (index === currentHandIndex) {
-            label += " (Aktiv)";
+            handDiv = document.querySelector("#active-hand");
+        }
+        else {
+            handDiv = sideHandDivs[sideHandIndex];
+            sideHandIndex++;
+        }
+        handDiv.querySelector(".hand-cards").innerHTML = "";
+        let label = handDiv.querySelector(".hand-text strong");
+        const scoreText = handDiv.querySelectorAll(".hand-text p");
+        //Karten platzieren
+        let formattedCards = formatPlayerCards(hand, index);
+        handDiv.querySelector(".hand-cards").appendChild(formattedCards);
+        //Punkte und Hand anzeigen
+        label.textContent = "Hand " + (index + 1);
+        if (index === currentHandIndex) {
+            label.textContent += " (Aktiv)";
+        }
+        if(handResults[index]){
+            scoreText[1].textContent = `Ergebnis: ${handResults[index]}`;
         }
         const score = getScore(hand);
-        handDiv.innerHTML = `<strong>${label}</strong>: ${formatCards(hand)} – Punkte: ${score}`;
-        if (handResults[index]) {
-            handDiv.innerHTML += ` – Ergebnis: ${handResults[index]}`;
-        }
-        playerContainer.appendChild(handDiv);
+        scoreText[0] .textContent = "Punkte: " + score;
+        
     });
 }
 
-function updateUIDealer(){
-    document.getElementById("dealer-cards").textContent = "Dealer Karten: " + formatCards(dealerCards);
+
+function formatPlayerCards(hand){
+    let offsetY = 0;
+    let offsetX = 0;
+    let angle = 0;
+    const cardContainer = document.createElement("div");
+    hand.forEach((element, index) => {
+        let card = document.createElement("img");
+        card.src = cards[element.suit][element.name];
+        angle = 5 * ((hand.length/2) - index);
+        card.classList.add("card");
+        if(hand.length <= 2){
+            offsetY = 0;
+            angle = 0;
+            offsetX = offsetX < 0 ? 0 : offsetX; 
+        }
+        else if(index === 0){
+            offsetY = 0;
+        }
+        else if(index < (hand.length/2)){
+            offsetY -= 4;
+        }
+        else if(index > (hand.length/2)) {
+            offsetY += 4;
+        }
+        card.style.transform = `translateX(${(offsetX/(hand.length/2))}vw) translateY(${(offsetY)/hand.length}vh) rotate(${-angle}deg)`;
+        offsetX += 4;
+        cardContainer.appendChild(card); 
+    });
+    return cardContainer;
+}
+
+
+function revealDealerCards() {
+    let offsetY = 0;
+    let offsetX = 0;
+    let angle = 0;
+    document.getElementById("dealer-cards").innerHTML = '';
+    dealerCards.forEach((element, index) => {
+        let card = document.createElement("img");
+        card.src = cards[element.suit][element.name];
+        angle = 5 * ((dealerCards.length/2) - index);
+        card.classList.add("card");
+        if(dealerCards.length <= 2){
+            offsetY = 0;
+            angle = 0;
+        }
+        else if(index === 0){
+            offsetY = 0;
+        }
+        else if(index < (dealerCards.length/2)){
+            offsetY += 4;
+        }
+        else if(index > (dealerCards.length/2)) {
+            offsetY -= 4;
+        }
+        card.style.transform = `translateX(${offsetX/(dealerCards.length/2)}vw)`;
+        offsetX += 4;
+        document.getElementById("dealer-cards").appendChild(card);
+        
+    });
     document.getElementById("dealer-score").textContent = "Dealer Punkte: " + getScore(dealerCards);
+}
+
+function updateUIDealer(){
+    let offset = 0;
+    document.getElementById("dealer-cards").innerHTML = '';
+    dealerCards.forEach((element, index) => {
+        let card = document.createElement("img");
+        card.style.transform = `translateX(${offset}vh) translateY(${offset}vh)`;
+        if(index === 0){
+            card.src = cards[element.suit][element.name];
+            card.classList.add("first-card");
+        }
+        else {
+            card.src = "img/cards/card-back.svg";
+            card.classList.add("card");
+            offset++;
+        }
+        document.getElementById("dealer-cards").appendChild(card);
+        
+    });
+    document.getElementById("dealer-score").textContent = "";
 }
 
 function end() {
@@ -111,6 +206,7 @@ function checkGameEnd() {
             }
         }
     }
+    revealDealerCards();
     updateUIPlayer();
     end();
 }
@@ -124,50 +220,54 @@ document.getElementById("restart").addEventListener("click", function() {
     while (dealerCards.length > 0) {
         dealerCards.pop();
     }
-    betDisplay.textContent = `Einsatz: ${betSlider.value}€`;
     start();
 })
 
-
-function start (){
+async function start (){
     // Ergebnisse der einzelnen Hände zurücksetzen
     handResults = [];
-    document.getElementById("result").textContent = "";
-
+    document.querySelectorAll(".player-hand").forEach(hand => {
+        hand.querySelector(".hand-cards").innerHTML = "";
+        hand.querySelector(".hand-text strong").textContent = "";
+        hand.querySelectorAll(".hand-text p").forEach(element => element.textContent = "");
+    });
     // Karten neu austeilen
     playerCards = [];
     dealerCards = [];
-    playerCards.push(deck.pop(), deck.pop());
-    dealerCards.push(deck.pop());
+    
+    document.getElementById("start").disabled = true;
+    document.getElementById("restart").disabled = true;
 
-    playerHands = [playerCards];
-    currentHandIndex = 0;
-
-    updateUIPlayer();
     updateUIDealer();
-    dealerCards.push(deck.pop());
+    currentHandIndex = 0;
+    await playerHit();
+    playerHands = [playerCards];
+    updateUIPlayer();
+    await playerHit();
+    playerHands = [playerCards];
+    updateUIPlayer();
+    await dealerHit();
+    updateUIDealer();
+    dealerHit();
 
     doubleButton.disabled = !canDouble();
     splitButton.disabled = !canSplit();
-    document.getElementById("restart").disabled = true;
     document.getElementById("hit").disabled = false;
     document.getElementById("stand").disabled = false;
-    document.getElementById("start").disabled = true;
+
 }
 
+// Hinzufügen eines Einsatz-Inputs und der Double- und Split-Buttons
 
-
-// Hinzufügen eines Einsatz-Sliders und der Double- und Split-Buttons
-
-const betSlider = document.createElement("input");
-betSlider.type = "range";
-betSlider.min = 1;
-betSlider.max = 100;
-betSlider.value = 10;
+const betInput = document.createElement("input");
+betInput.type = "number";
+betInput.min = 1;
+betInput.max = Account;
+betInput.value = 10;
 const betDisplay = document.createElement("p");
-betDisplay.textContent = `Einsatz: ${betSlider.value}€`;
+betDisplay.textContent = `Einsatz: `;
 let betAmount = [];
-betAmount [0] = betSlider.value;
+betAmount [0] = betInput.value;
 
 
 const doubleButton = document.createElement("button");
@@ -178,14 +278,20 @@ const splitButton = document.createElement("button");
 splitButton.textContent = "Splitten";
 splitButton.disabled = true;
 
-document.body.insertBefore(betSlider, document.getElementById("bet"));
-document.body.insertBefore(betDisplay, document.getElementById("bet"));
-document.body.insertBefore(doubleButton, document.getElementById("hit"));
-document.body.insertBefore(splitButton, document.getElementById("hit"));
+const betDiv = document.createElement("div");
+betDiv.appendChild(betDisplay);
+betDiv.appendChild(betInput);
 
-betSlider.addEventListener("input", () => {
-    betAmount [currentHandIndex] = betSlider.value;
-    betDisplay.textContent = `Einsatz: ${betAmount [currentHandIndex]}€`;
+const AccountDisplay = document.createElement("p");
+AccountDisplay.textContent = `Konto: ${Account} Credits`;
+document.querySelector(".bet-section").insertBefore(AccountDisplay, document.querySelector("#start-buttons"));
+
+document.querySelector(".bet-section").insertBefore(betDiv, document.querySelector("#start-buttons"));
+document.querySelector(".more-options").appendChild(doubleButton);
+document.querySelector(".more-options").appendChild(splitButton);
+
+betInput.addEventListener("input", () => {
+    betAmount [currentHandIndex] = betInput.value;
 });
 
 let playerHands = [[0][0]];
@@ -248,34 +354,71 @@ function switchToNextHand() {
     }
 }
 
-document.getElementById("hit").addEventListener("click", function() {
-    playerCards.push(deck.pop());
+document.getElementById("hit").addEventListener("click", async function() {
+    await playerHit();
     updateUIPlayer();
+    updateUIDealer();
     if (getScore(playerCards) > 21) {
         switchToNextHand();
     }
 });
 
-document.getElementById("stand").addEventListener("click", function() {
+document.getElementById("stand").addEventListener("click", async function() {
     if (!(currentHandIndex < playerHands.length - 1)){
         while (getScore(dealerCards) < 17) {
-            dealerCards.push(deck.pop());
-
+            await dealerHit();
         }
         updateUIDealer();
         checkGameEnd();
+        
     }
 
     switchToNextHand();
 });
 
 
+async function dealerHit(){
+    /* Animation, wenn der Dealer Karten zieht */
+    const hitDuration = {
+        duration: 500,
+        iterations: 1,
+        easing: "ease"
+    };
 
-//Konto bums
+    const hitAnimation = [
+        {transform: "translateX(0)", display: "block"},
+        {transform: "translateX(20vw)", display: "none"}
+    ];
 
-const AccountDisplay = document.createElement("p");
-AccountDisplay.textContent = `Konto: ${Account}€`;
-document.body.insertBefore(AccountDisplay, document.getElementById("bet"));
+    const newCard = document.querySelector(".new-card");
+    await newCard.animate(hitAnimation, hitDuration).finished; // Wait for animation to finish
+    dealerCards.push(deck.pop());
+    
+    updateUIDealer();
+
+}
+
+async function playerHit(){
+    /* Animation, wenn der Dealer Karten zieht */
+    const hitDuration = {
+        duration: 500,
+        iterations: 1,
+        easing: "ease"
+    };
+
+    const hitAnimation = [
+        {transform: "translateX(0) translateY(0)", display: "block"},
+        {transform: "translateX(20vw) translateY(40vh)", display: "none"}
+    ];
+
+    const newCard = document.querySelector(".new-card");
+    await newCard.animate(hitAnimation, hitDuration).finished; // Wait for animation to finish
+    playerCards.push(deck.pop());
+
+}
+
+
+
 
 
 

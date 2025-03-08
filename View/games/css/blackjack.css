@@ -1,0 +1,294 @@
+/* Generell */
+body {
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1vh;
+    margin: 1vh;
+    border-radius: 1vh;
+    border: none;
+    color: white;
+    font-size: 2.5vh;
+    transition: background-color 0.1s, scale 0.1s;
+}
+
+button:hover {
+    background-color: gold;
+    scale: 1.1;
+}
+
+button:active {
+    background-color: gold;
+    scale: 0.9;
+}
+
+button:disabled{
+    background-color: rgba(0, 0, 0, 0.2);
+    scale: 1;
+    color: grey;
+}
+
+/* Container für das Spiel */
+.blackjack-table {
+   background-color: green; 
+   border: 2vh solid brown;
+   border-top: none;
+   border-bottom-left-radius: 60vh;
+   border-bottom-right-radius: 60vh;
+   padding: 5vh;
+   padding-top: 0;
+   width: 60%;
+   height: 90vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   color: white;
+}
+
+.card {
+    height: 20vh;
+    width: 5.5vw;
+}
+
+.hit-section .card {
+    padding: 1vh;
+    outline: 0.3vh solid white;
+    border-radius: 1vh;
+}
+
+.top-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2vw;
+    width: 100%;
+    flex: 1;
+}
+
+.hit-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.more-options {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 20vh;
+    align-self: center;
+    margin-bottom: 6.5vh;
+    padding: 1vh;
+    outline: 0.3vh solid white;
+    border-radius: 1vh;
+}
+
+.more-options button {
+    width: 8vw;
+    height: 6vh;
+}
+
+#hit {
+    background: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scale: 1;
+}
+
+.new-card {
+    height: 20vh;
+    position: fixed;
+    top: 11vh;
+    left: 25.5%;
+    display: none;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+
+#hit:hover .hit-text {
+    background-color: gold;
+    scale: 1.05;
+}
+
+#hit:active .hit-text {
+    background-color: gold;
+    scale: 0.95;
+}
+
+.hit-text {
+    padding: 1vh;
+    margin: 1vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 1vh;
+    font-size: 2.5vh;
+    transition: background-color 0.1s, scale 0.1s;
+}
+
+#hit:disabled .hit-text {
+    opacity: 0;
+}
+
+
+.bottom-section {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+}
+
+.bottom-section h1 {
+    position: absolute;
+    top: 3%;
+    font-size: 5vh;
+    height: 6vw;
+    width: 14vw;
+    padding-top: 8vw;
+    text-align: center;
+    border-bottom: 5vh solid black;
+    border-left: 5vh solid black;
+    border-right: 5vh solid black;
+    border-bottom-left-radius: 10vw;
+    border-bottom-right-radius: 10vw;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 51%);
+}
+
+.bet-section button {
+    width: 7vw;
+    height: 5vh;
+}
+
+
+.bet-section {
+    margin-top: 7vh;
+    padding: 2vh;
+    height: 26vh;
+    border: 0.3vh solid white;
+    border-radius: 2vh;
+}
+
+.bet-section div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2vh;
+}
+
+.bet-section div p{
+    font-size: 2.5vh;
+    margin-right: 2vw;
+}
+
+.bet-section p {
+    font-size: 2.8vh;
+}
+
+.bet-section input {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 3vw;
+    height: 3vh;
+    font-size: 2vh;
+    color: white;
+    text-align: center;
+    border: 0.3vh solid white;
+    border-radius: 1vh;
+}
+
+/* Default Außenlinie bei Auswahl entfernen*/
+.bet-section input:focus {
+    outline: none;
+}
+
+.dealer-section{
+    width: 16vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dealer-cards-section, .player-cards-section {
+    width: 100%;
+}
+
+#dealer-cards {
+    height: 20vh;
+    min-width: 11.7vw;
+    justify-self: center;
+    padding: 1vh;
+    outline: 0.3vh solid white;
+    border-radius: 1vh;
+}
+
+#dealer-cards .card, #player-cards .card {
+    position:absolute;
+    display: inline;
+}
+
+.dealer-cards-section p {
+    font-size: 2.5vh;
+    text-align: center;
+    font-weight: bold;
+}
+
+.first-card {
+    height: 20vh;
+    position: relative;
+    margin-right: 1vw;
+}
+
+#dealer-score {
+    margin-top: 5vh;
+    text-align: center;
+    height: 3vh;
+}
+
+#player-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 20vh;
+}
+.player-hand {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    z-index: 2;
+}
+
+#side-hand {
+    transform: translateY(-10vh);
+    scale: 0.7;
+}
+
+.hand-cards{
+    height: 20vh;
+    width: 11.7vw;
+    justify-self: center;
+    padding: 1vh;
+    outline: 0.3vh solid white;
+    border-radius: 1vh;
+}
+
+.hand-text {
+    width: 8vw;
+    justify-self: center;
+    padding: 1vh;
+    border: 0.3vh solid white;
+    border-top: 0;
+    border-bottom-left-radius: 1vh;
+    border-bottom-right-radius: 1vh;
+    text-align: center;
+}
+
+.hand-text p, .hand-text strong {
+    height: 3vh;
+}
