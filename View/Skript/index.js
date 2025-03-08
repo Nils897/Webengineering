@@ -30,25 +30,7 @@ function setupNavLinks() {
 }
 
 function loadPage(page) {
-    fetch(page)
-        .then(response => response.text())
-        .then(data => {
-            const container = document.getElementById("content");
-            container.innerHTML = data;
-
-            const scripts = container.querySelectorAll("script");
-            scripts.forEach(oldScript => {
-                const newScript = document.createElement("script");
-                if (oldScript.src) {
-                    newScript.src = oldScript.src;
-                } else {
-                    newScript.textContent = oldScript.textContent;
-                }
-                oldScript.parentNode.removeChild(oldScript);
-                document.body.appendChild(newScript);
-            });
-        })
-        .catch(error => console.error("Fehler beim Laden der Seite:", error));
+    window.location.href = page;
 }
 
 document.addEventListener("DOMContentLoaded", loadLayout);
