@@ -11,7 +11,7 @@ const values = [
 ];
 let Account = getAccountCredits();
 
-
+let playerTurn = 0;
 let handResults = [];
 
 
@@ -118,6 +118,7 @@ function formatPlayerCards(hand){
 
 
 function revealDealerCards() {
+    playerTurn = 0;
     let offsetY = 0;
     let offsetX = 0;
     let angle = 0;
@@ -178,8 +179,7 @@ function end() {
     if (deck.length<20){
         deck = createDeck();
     }
-    const userData = JSON.parse(sessionStorage.getItem("loggedInUser"));
-    updateCreditsOnServer(userData.username, Account);
+    updateCreditsOnServer(Account);
 }
 
 function checkGameEnd() {
@@ -226,6 +226,8 @@ document.getElementById("restart").addEventListener("click", function() {
 async function start (){
     // Ergebnisse der einzelnen Hände zurücksetzen
     handResults = [];
+    betAmount [0] = betInput.value;
+    playerTurn = 1;
     document.querySelectorAll(".player-hand").forEach(hand => {
         hand.querySelector(".hand-cards").innerHTML = "";
         hand.querySelector(".hand-text strong").textContent = "";
@@ -302,7 +304,7 @@ function canSplit() {
 }
 
 function canDouble() {
-    return playerHands[currentHandIndex].length === 2;
+    return (playerHands[currentHandIndex].length === 2) & playerTurn === 1;
 }
 
 document.getElementById("start").addEventListener("click", function() {
@@ -315,7 +317,6 @@ doubleButton.addEventListener("click", function() {
     betAmount [currentHandIndex] = betAmount [currentHandIndex]*2;
     updateUIPlayer();
     betDisplay.textContent = `Einsatz: ${betAmount [currentHandIndex]}€`;
-    doubleButton.disabled = true;
     document.getElementById("hit").disabled = true;
     document.getElementById("stand").click();
 });
@@ -339,6 +340,7 @@ splitButton.addEventListener("click", function() {
 
 
 function switchToNextHand() {
+
     if (currentHandIndex < playerHands.length - 1) {
         currentHandIndex++;
         playerCards = playerHands[currentHandIndex];
@@ -349,6 +351,7 @@ function switchToNextHand() {
         else {
             splitButton.disabled = false;
         }
+        doubleButton.disabled = !canDouble();
     } else {
         document.getElementById("stand").click();
     }
@@ -364,6 +367,7 @@ document.getElementById("hit").addEventListener("click", async function() {
 });
 
 document.getElementById("stand").addEventListener("click", async function() {
+    doubleButton.disabled = true
     if (!(currentHandIndex < playerHands.length - 1)){
         while (getScore(dealerCards) < 17) {
             await dealerHit();

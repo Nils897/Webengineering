@@ -32,6 +32,14 @@ function closeGame(xOffset){
 }
 
 function startGame(game) {
+
+    const userData = sessionStorage.getItem("loggedInUser");
+    if (!userData) {
+        console.error("Kein eingeloggter Benutzer gefunden!");
+        alert("Bitte logge dich zuerst ein!");
+        window.location.href = "../logIn.html"; // Zurück zur Login-Seite
+        return;
+    }
     /* zoomt in das Bild und lädt das gewählte Spiel */
 
     gameView.style.display = 'flex';
