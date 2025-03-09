@@ -10,6 +10,10 @@ const star =  "img/slotmachineSymbols/star.png";
 const dice =  "img/slotmachineSymbols/dice.png";
 const symbols = [diamant, flame, bell, heart , card, star, cloverleaf, dice, moneybag, cherry];
 
+//let accountCredits = getAccountCredits();
+
+//Wette muss auf Account landen fehlt noch
+
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".reel").forEach(reel => createReels(reel));
 });
@@ -22,21 +26,21 @@ function createReels(reelElement) {
         let img = document.createElement("img");
         let symbolLink = symbols[i % symbols.length];
         img.src = symbolLink;
-        img.alt = getAltOfImage(symbolLink);
-        img.width = 100;
-        img.height = 100;
+        img.alt = symbolLink;
+        img.width = 80;
+        img.height = 80;
         container.appendChild(img);
         reelElement.appendChild(container);
     }
 }
 
-function getAltOfImage(imgLink) {
-    let parts = imgLink.split("/");
-    return parts[2];
+function bet() {
+    let input = document.getElementById("input").value;
+
 }
 
 function getRandomSymbolOffset() {
-    return Math.floor(Math.random() * 14) * -100;
+    return Math.floor(Math.random() * 14) * -80;
 }
 
 function getVisibleImage(reelContainer) {
@@ -58,9 +62,9 @@ function getVisibleImage(reelContainer) {
 }
 
 function spin() {
-    let shouldClickAvailabe = false;
-    changeClickEventFromButton(shouldClickAvailabe);
-    document.getElementById("output").innerText = "";
+    increaseBlinkFrequenz(false);
+    changeClickEventFromButton(false);
+    document.getElementById("output").innerText = "dreht...";
     const reels = document.querySelectorAll(".reel");
     let chosenReels = [];
     reels.forEach((reel, index) => {
@@ -75,8 +79,7 @@ function spin() {
             if (chosenReels.length === 5) {
                 console.log(`Index: ${index} ${chosenReels}`);
                 getResultOfSpin(chosenReels);
-                shouldClickAvailabe = true;
-                changeClickEventFromButton(shouldClickAvailabe);
+                changeClickEventFromButton(true);
             }
         }, (Math.random() * 2 + 2) * 1000 );
     });
@@ -109,22 +112,39 @@ function getResultOfSpin(chosenReels) {
     getAnswerString(maxCount);
 }
 
+function increaseBlinkFrequenz(shouldBlinkBeIncreased) {
+    if (shouldBlinkBeIncreased) {
+        document.querySelectorAll(".light").forEach(light => {
+            light.style.animation = "blink 0.1s infinite";
+        });
+    }
+    else {
+        document.querySelectorAll(".light").forEach(light => {
+            light.style.animation = "blink 0.5s infinite";
+        });
+    }
+}
+
 function getAnswerString(maxCount) {
     switch(maxCount) {
         case 2:
-            document.getElementById("output").innerText = "2 Symbole sind gleich"
+            document.getElementById("output").innerText = "Gewinn! Einsatz zurück";
+            increaseBlinkFrequenz(true);
             break;
         case 3:
-            document.getElementById("output").innerText = "3 Symbole sind gleich"
+            document.getElementById("output").innerText = "Gewinn! Einsatz x3";
+            increaseBlinkFrequenz(true);
             break;
         case 4:
-            document.getElementById("output").innerText = "4 Symbole sind gleich"
+            document.getElementById("output").innerText = "Gewinn! Einsatz x10";
+            increaseBlinkFrequenz(true);
             break;
         case 5:
-            document.getElementById("output").innerText = "5 Symbole sind gleich"
+            document.getElementById("output").innerText = "Gewinn! Einsatz x100";
+            increaseBlinkFrequenz(true);
             break;
         default:
-            document.getElementById("output").innerText = "Keine Symbole sind gleich"
+            document.getElementById("output").innerText = "Niete";
             break;
     }
 }
