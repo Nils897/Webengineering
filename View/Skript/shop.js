@@ -1,4 +1,4 @@
-
+document.addEventListener("DOMContentLoaded", function() {
     const shopContainer = document.getElementById("shop-container");
 
     const items = [
@@ -28,7 +28,7 @@
             confirmPurchase(amount);
         });
     });
-
+});
 
 // Funktion für den Kaufprozess
 function confirmPurchase(amount) {

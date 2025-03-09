@@ -238,8 +238,9 @@ function end() {
     if (deck.length < 20) {
         deck = createDeck();
     }
-
-    updateCreditsOnServer(Account);
+    const userData = sessionStorage.getItem("loggedInUser");
+    const user = JSON.parse(userData);
+    updateCreditsOnServer(user.username, Account);
 }
 
 /**
