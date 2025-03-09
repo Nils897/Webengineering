@@ -92,14 +92,6 @@ function getScore(cards) {
     return score;
 }
 
-/**
- * Formatiert Kartenhand als Text.
- * @param {Array} cards
- * @returns {string}
- */
-function formatCards(cards) {
-    return cards.map(card => `${card.suit} ${card.name}`).join(", ");
-}
 
 /**
  * Aktualisiert die UI für alle Spielerhände.
@@ -292,6 +284,7 @@ function switchToNextHand() {
         updateUIPlayer();
         splitButton.disabled = !canSplit();
         doubleButton.disabled = !canDouble();
+        document.getElementById("hit").disabled = false;
     } else {
         document.getElementById("stand").click();
     }
