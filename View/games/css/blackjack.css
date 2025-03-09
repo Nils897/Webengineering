@@ -162,23 +162,6 @@ button:disabled {
     margin-bottom: 2vh;
 }
 
-/* Überschrift im unteren Bereich */
-.bottom-section h1 {
-    position: absolute;
-    top: 3%;
-    font-size: 5vh;
-    height: 6vw;
-    width: 14vw;
-    padding-top: 8vw;
-    text-align: center;
-    border-bottom: 5vh solid black;
-    border-left: 5vh solid black;
-    border-right: 5vh solid black;
-    border-bottom-left-radius: 10vw;
-    border-bottom-right-radius: 10vw;
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 51%);
-}
-
 /* === Einsatzbereich für Wetten === */
 .bet-section {
     margin-top: 7vh;
