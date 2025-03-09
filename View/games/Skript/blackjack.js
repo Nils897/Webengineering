@@ -116,7 +116,7 @@ function updateUIPlayer() {
 
         label.textContent = `Hand ${index + 1}` + (index === currentHandIndex ? " (Aktiv)" : "");
         if (handResults[index]) {
-            scoreText[1].textContent = `Ergebnis: ${handResults[index]}`;
+            scoreText[1].textContent = handResults[index];
         }
         const score = getScore(hand);
         scoreText[0].textContent = "Punkte: " + score;
