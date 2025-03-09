@@ -1,0 +1,14 @@
+Zu 4.:
+Für europäische Sprachen reicht meist utf-8 aus, da es alle lateinischen Buchstaben beinhaltet.
+Für asiatsche Sprachen wird utf-16 benötigt, da sie Schriftzeichen verwenden, die sich in diesem Teil
+des Unicodes befinden.
+
+Zu 5.:
+Der Begriff "Glyph" (auf Deutsch oft "Glyphe" genannt) bezeichnet eine graphische Darstellung eines
+Zeichens oder einer Schriftform, die visuell als Symbol oder Zeichen auftritt. Es ist ein spezifisches
+Symbol oder eine Form, die ein Zeichen in einem bestimmten Schriftsystem repräsentiert, und es wird oft
+als grafische Entsprechung eines Codepoints oder eines Zeichens verstanden. Ein Glyphe ist die sichtbare
+Darstellung eines Zeichens (oder einer Kombination von Zeichen) in einer bestimmten Schriftart und -größe.
+
+Zu 6.:
+Das Emogy wird als Fragezeichen ausgegeben und kann somit nicht angezeigt werden.

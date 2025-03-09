@@ -1,0 +1,8 @@
+<!ELEMENT Edward_Snowden (Überschrift, Absatz+)>
+<!ELEMENT Überschrift (#PCDATA)>
+<!ELEMENT Absatz (BeschriebeneZeile*, Leerzeile*)>
+<!ELEMENT BeschriebeneZeile (Normalschrift | Fettdruck | Kursiv)+>
+<!ELEMENT Leerzeile EMPTY>
+<!ELEMENT Normalschrift (#PCDATA)>
+<!ELEMENT Fettdruck (#PCDATA)>
+<!ELEMENT Kursiv (#PCDATA)>

@@ -10,7 +10,8 @@ const star =  "img/slotmachineSymbols/star.png";
 const dice =  "img/slotmachineSymbols/dice.png";
 const symbols = [diamant, flame, bell, heart , card, star, cloverleaf, dice, moneybag, cherry];
 
-//let accountCredits = getAccountCredits();
+let accountCredits = getAccountCredits();
+let wonCredits = 0;
 
 //Wette muss auf Account landen fehlt noch
 
@@ -36,7 +37,7 @@ function createReels(reelElement) {
 
 function bet() {
     let input = document.getElementById("input").value;
-
+    wonCredits += input;
 }
 
 function getRandomSymbolOffset() {
@@ -130,21 +131,33 @@ function getAnswerString(maxCount) {
         case 2:
             document.getElementById("output").innerText = "Gewinn! Einsatz zurück";
             increaseBlinkFrequenz(true);
+            console.log(`Vorher: ${accountCredits}`);
+            accountCredits += wonCredits;
+            console.log(`Nachher: ${accountCredits}`);
+            updateCreditsOnServer(accountCredits);
             break;
         case 3:
             document.getElementById("output").innerText = "Gewinn! Einsatz x3";
             increaseBlinkFrequenz(true);
+            accountCredits += 3 * wonCredits;
+            updateCreditsOnServer(accountCredits);
             break;
         case 4:
             document.getElementById("output").innerText = "Gewinn! Einsatz x10";
             increaseBlinkFrequenz(true);
+            accountCredits += 10 * wonCredits;
+            updateCreditsOnServer(accountCredits);
             break;
         case 5:
             document.getElementById("output").innerText = "Gewinn! Einsatz x100";
             increaseBlinkFrequenz(true);
+            accountCredits += 100 * wonCredits;
+            updateCreditsOnServer(accountCredits);
             break;
         default:
             document.getElementById("output").innerText = "Niete";
+            accountCredits -= wonCredits;
+            updateCreditsOnServer(accountCredits);
             break;
     }
 }
