@@ -125,6 +125,9 @@ function increaseBlinkFrequenz(shouldBlinkBeIncreased) {
         });
     }
 }
+function hm (){
+
+}
 
 function getAnswerString(maxCount) {
     switch(maxCount) {
@@ -146,7 +149,7 @@ function getAnswerString(maxCount) {
             document.getElementById("output").innerText = "Gewinn! Einsatz x10";
             increaseBlinkFrequenz(true);
             accountCredits += 10 * wonCredits;
-            updateCreditsOnServer(accountCredits);
+            updateCreditsOnServer(accountCredits)
             break;
         case 5:
             document.getElementById("output").innerText = "Gewinn! Einsatz x100";
