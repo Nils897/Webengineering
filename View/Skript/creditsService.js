@@ -12,14 +12,12 @@ function getAccountCredits(){
     return user.credits;
 }
 
-function updateCreditsOnServer( credits) {
+function updateCreditsOnServer(username, credits) {
     // Aktualisiere auch den in sessionStorage gespeicherten Benutzer
-    let username
     const userData = sessionStorage.getItem("loggedInUser");
     if (userData) {
         const user = JSON.parse(userData);
         user.credits = credits;
-        username = user.username
         sessionStorage.setItem("loggedInUser", JSON.stringify(user));
     }
 
