@@ -18,6 +18,17 @@ function initProfile() {
     document.getElementById("username").textContent = user.username;
     document.getElementById("email").textContent = user.email;
     document.getElementById("credits").textContent = user.credits + " Credits";
+
+    document.getElementById("Logout").addEventListener("click", logout);
+}
+
+function logout(){
+    // Entferne den eingeloggten Benutzer
+    sessionStorage.removeItem("loggedInUser");
+    // Optional: eine Bestätigung oder Meldung anzeigen
+    alert("Du wurdest ausgeloggt.");
+    // Weiterleiten zur Login-Seite
+    window.location.href = "index.html";
 }
 
 // Warten, bis das DOM geladen ist
