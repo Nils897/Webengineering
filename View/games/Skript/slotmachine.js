@@ -54,8 +54,8 @@ function replaceTextWithInputField() {
     let inputField = document.createElement("input");
     inputField.setAttribute("id", "input");
     inputField.setAttribute("type", "number");
-    inputField.setAttribute("min", "1");
-    inputField.setAttribute("value", "1");
+    inputField.setAttribute("min", "10");
+    inputField.setAttribute("value", "10");
     container.replaceChild(inputField, text);
 }
 
