@@ -10,7 +10,6 @@ const star =  "img/slotmachineSymbols/star.png";
 const dice =  "img/slotmachineSymbols/dice.png";
 const symbols = [diamant, flame, bell, heart , card, star, cloverleaf, dice, moneybag, cherry];
 
-let accountCredits = getAccountCredits();
 let wonCredits = 0;
 
 //Wette muss auf Account landen fehlt noch
@@ -36,8 +35,38 @@ function createReels(reelElement) {
 }
 
 function bet() {
+    changeClickEventFromSpinButton(true)
     let input = document.getElementById("input").value;
     wonCredits += input;
+    let inputField = document.getElementById("input");
+    changeClickEventFromBetButton(false);
+    let container = document.getElementById("buttons");
+    let text = document.createElement("p");
+    text.setAttribute("class", "input-text");
+    text.setAttribute("id", "input-text");
+    text.textContent = `${input} Credits gesetzt`;
+    container.replaceChild(text, inputField);
+}
+
+function replaceTextWithInputField() {
+    let container = document.getElementById("buttons");
+    let text = document.getElementById("input-text");
+    let inputField = document.createElement("input");
+    inputField.setAttribute("id", "input");
+    inputField.setAttribute("type", "number");
+    inputField.setAttribute("min", "1");
+    inputField.setAttribute("value", "1");
+    container.replaceChild(inputField, text);
+}
+
+
+function changeClickEventFromBetButton(shouldClickAvailable) {
+    if (shouldClickAvailable) {
+        document.getElementById("betButton").setAttribute("onclick", "bet()");
+    }
+    else {
+        document.getElementById("betButton").removeAttribute("onclick");
+    }
 }
 
 function getRandomSymbolOffset() {
@@ -64,7 +93,7 @@ function getVisibleImage(reelContainer) {
 
 function spin() {
     increaseBlinkFrequenz(false);
-    changeClickEventFromButton(false);
+    changeClickEventFromSpinButton(false);
     document.getElementById("output").innerText = "dreht...";
     const reels = document.querySelectorAll(".reel");
     let chosenReels = [];
@@ -80,13 +109,15 @@ function spin() {
             if (chosenReels.length === 5) {
                 console.log(`Index: ${index} ${chosenReels}`);
                 getResultOfSpin(chosenReels);
-                changeClickEventFromButton(true);
+                changeClickEventFromSpinButton(false);
+                changeClickEventFromBetButton(true);
+                replaceTextWithInputField();
             }
         }, (Math.random() * 2 + 2) * 1000 );
     });
 }
 
-function changeClickEventFromButton(shouldClickAvailable) {
+function changeClickEventFromSpinButton(shouldClickAvailable) {
     if (shouldClickAvailable) {
         document.getElementById("spinButton").setAttribute("onclick", "spin()");
     }
@@ -125,42 +156,44 @@ function increaseBlinkFrequenz(shouldBlinkBeIncreased) {
         });
     }
 }
-function hm (){
-
-}
 
 function getAnswerString(maxCount) {
+    let accountCredits = getAccountCredits();
+    const userData = sessionStorage.getItem("loggedInUser");
+    const user = JSON.parse(userData);
     switch(maxCount) {
         case 2:
             document.getElementById("output").innerText = "Gewinn! Einsatz zurück";
             increaseBlinkFrequenz(true);
-            console.log(`Vorher: ${accountCredits}`);
-            accountCredits += wonCredits;
-            console.log(`Nachher: ${accountCredits}`);
-            updateCreditsOnServer(accountCredits);
+            updateCreditsOnServer(user.username, accountCredits);
+            wonCredits = 0;
             break;
         case 3:
             document.getElementById("output").innerText = "Gewinn! Einsatz x3";
             increaseBlinkFrequenz(true);
             accountCredits += 3 * wonCredits;
-            updateCreditsOnServer(accountCredits);
+            updateCreditsOnServer(user.username, accountCredits);
+            wonCredits = 0;
             break;
         case 4:
             document.getElementById("output").innerText = "Gewinn! Einsatz x10";
             increaseBlinkFrequenz(true);
             accountCredits += 10 * wonCredits;
-            updateCreditsOnServer(accountCredits)
+            updateCreditsOnServer(user.username, accountCredits);
+            wonCredits = 0;
             break;
         case 5:
             document.getElementById("output").innerText = "Gewinn! Einsatz x100";
             increaseBlinkFrequenz(true);
             accountCredits += 100 * wonCredits;
-            updateCreditsOnServer(accountCredits);
+            updateCreditsOnServer(user.username, accountCredits);
+            wonCredits = 0;
             break;
         default:
             document.getElementById("output").innerText = "Niete";
             accountCredits -= wonCredits;
-            updateCreditsOnServer(accountCredits);
+            updateCreditsOnServer(user.username, accountCredits);
+            wonCredits = 0;
             break;
     }
 }
