@@ -1,0 +1,21 @@
+<!DOCTYPE Textbox SYSTEM "./snowden.dtd">
+<?xml-stylesheet href="snowden.css" type="text/css"?>
+<Textbox>
+    <Überschrift>Edward Snowden</Überschrift>
+    <Text>
+        <Absatz>
+            <Fett>Edward Snowden</Fett><Normal>	ist	ein</Normal><Kursiv> US-amerikanischer	Whistleblower</Kursiv>
+            <Normal> und ehemaliger </Normal><Kursiv>CIA-Mitarbeiter</Kursiv><Normal>. Seine Enthüllungen	gaben	Einblicke	in	das	
+            Ausmaß der	weltweiten	Überwachungs- und	Spionagepraktiken	von	
+            Geheimdiensten – überwiegend	jenen	der	Vereinigten	Staaten	und	
+            Großbritanniens. Diese	lösten	im	Sommer	2013	die	NSA-Affäre	aus.</Normal>	
+        </Absatz>
+        <Leerzeile></Leerzeile>
+        <Absatz>
+            <Normal>
+                Er	wurde	dafür	mehrfach	von	nichtstaatlichen	Organisationen	
+                ausgezeichnet	und	für	den	Friedensnobelpreis	nominiert.
+            </Normal>
+        </Absatz>
+    </Text>
+</Textbox>
