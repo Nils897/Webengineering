@@ -1,44 +1,50 @@
-/* Generell */
+/* === Generelle Layout- und Stildefinitionen === */
+
+/* Zentriert den gesamten Body-Inhalt horizontal */
 body {
     display: flex;
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Standard-Stil für alle Buttons */
 button {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5); /* Halbtransparentes Schwarz */
     padding: 1vh;
     margin: 1vh;
-    border-radius: 1vh;
+    border-radius: 1vh; /* Abgerundete Ecken */
     border: none;
     color: white;
     font-size: 2.5vh;
-    transition: background-color 0.1s, scale 0.1s;
+    transition: background-color 0.1s, scale 0.1s; /* Sanfte Übergänge */
 }
 
+/* Button Hover-Effekt */
 button:hover {
-    background-color: gold;
-    scale: 1.1;
+    background-color: gold; /* Goldener Button bei Hover */
+    scale: 1.1; /* Leicht vergrößern */
 }
 
+/* Button beim Klicken */
 button:active {
     background-color: gold;
-    scale: 0.9;
+    scale: 0.9; /* Leicht verkleinern beim Klick */
 }
 
-button:disabled{
+/* Deaktivierter Button */
+button:disabled {
     background-color: rgba(0, 0, 0, 0.2);
     scale: 1;
     color: grey;
 }
 
-/* Container für das Spiel */
+/* === Blackjack-Tisch Container === */
 .blackjack-table {
-   background-color: green; 
-   border: 2vh solid brown;
-   border-top: none;
+   background-color: green; /* Tischfläche */
+   border: 2vh solid brown; /* Holzrahmen */
+   border-top: none; /* Kein oberer Rand */
    border-bottom-left-radius: 60vh;
-   border-bottom-right-radius: 60vh;
+   border-bottom-right-radius: 60vh; /* Abgerundeter Tischboden */
    padding: 5vh;
    padding-top: 0;
    width: 60%;
@@ -46,28 +52,32 @@ button:disabled{
    display: flex;
    flex-direction: column;
    justify-content: center;
-   color: white;
+   color: white; /* Textfarbe */
 }
 
+/* Einzelne Karten */
 .card {
     height: 20vh;
     width: 5.5vw;
 }
 
+/* Karten in der Hit-Section */
 .hit-section .card {
     padding: 1vh;
     outline: 0.3vh solid white;
     border-radius: 1vh;
 }
 
+/* === Top-Bereich mit Dealer, Spieler usw. === */
 .top-section {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr; /* Drei gleich große Spalten */
     gap: 2vw;
     width: 100%;
     flex: 1;
 }
 
+/* Hit-Bereich für Kartenaufnahme */
 .hit-section {
     display: flex;
     flex-direction: row;
@@ -75,6 +85,7 @@ button:disabled{
     align-items: center;
 }
 
+/* Mehr Optionen Button-Container */
 .more-options {
     display: flex;
     flex-direction: column;
@@ -87,11 +98,13 @@ button:disabled{
     border-radius: 1vh;
 }
 
+/* Buttons innerhalb der mehr-options Sektion */
 .more-options button {
     width: 8vw;
     height: 6vh;
 }
 
+/* Hit-Button selbst */
 #hit {
     background: none;
     display: flex;
@@ -101,26 +114,30 @@ button:disabled{
     scale: 1;
 }
 
+/* Animation für das Ziehen einer neuen Karte */
 .new-card {
     height: 20vh;
     position: fixed;
     top: 11vh;
     left: 25.5%;
-    display: none;
+    display: none; /* Standardmäßig nicht sichtbar */
     transform: translateX(-50%);
-    z-index: 100;
+    z-index: 100; /* Liegt über anderen Elementen */
 }
 
+/* Hover-Effekt beim Hit-Button */
 #hit:hover .hit-text {
     background-color: gold;
     scale: 1.05;
 }
 
+/* Klick-Effekt beim Hit-Button */
 #hit:active .hit-text {
     background-color: gold;
     scale: 0.95;
 }
 
+/* Hit-Button Text */
 .hit-text {
     padding: 1vh;
     margin: 1vh;
@@ -130,41 +147,22 @@ button:disabled{
     transition: background-color 0.1s, scale 0.1s;
 }
 
+/* Hit-Button deaktiviert: Text wird unsichtbar */
 #hit:disabled .hit-text {
     opacity: 0;
 }
 
-
+/* === Unterer Bereich der Ansicht === */
 .bottom-section {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
     flex: 1;
     align-items: center;
+    margin-bottom: 2vh;
 }
 
-.bottom-section h1 {
-    position: absolute;
-    top: 3%;
-    font-size: 5vh;
-    height: 6vw;
-    width: 14vw;
-    padding-top: 8vw;
-    text-align: center;
-    border-bottom: 5vh solid black;
-    border-left: 5vh solid black;
-    border-right: 5vh solid black;
-    border-bottom-left-radius: 10vw;
-    border-bottom-right-radius: 10vw;
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 51%);
-}
-
-.bet-section button {
-    width: 7vw;
-    height: 5vh;
-}
-
-
+/* === Einsatzbereich für Wetten === */
 .bet-section {
     margin-top: 7vh;
     padding: 2vh;
@@ -173,6 +171,7 @@ button:disabled{
     border-radius: 2vh;
 }
 
+/* Container für einzelne Elemente innerhalb der Einsatz-Sektion */
 .bet-section div {
     display: flex;
     flex-direction: row;
@@ -180,7 +179,8 @@ button:disabled{
     margin-bottom: 2vh;
 }
 
-.bet-section div p{
+/* Text innerhalb der Einsatz-Sektion */
+.bet-section div p {
     font-size: 2.5vh;
     margin-right: 2vw;
 }
@@ -189,6 +189,7 @@ button:disabled{
     font-size: 2.8vh;
 }
 
+/* Eingabefelder für Wetteinsätze */
 .bet-section input {
     background-color: rgba(0, 0, 0, 0.5);
     width: 3vw;
@@ -200,12 +201,13 @@ button:disabled{
     border-radius: 1vh;
 }
 
-/* Default Außenlinie bei Auswahl entfernen*/
+/* Entfernt den Standard-Fokusrahmen */
 .bet-section input:focus {
     outline: none;
 }
 
-.dealer-section{
+/* === Dealer-Bereich === */
+.dealer-section {
     width: 16vw;
     display: flex;
     flex-direction: column;
@@ -213,10 +215,12 @@ button:disabled{
     align-items: center;
 }
 
+/* Dealer- und Spieler-Kartenbereiche */
 .dealer-cards-section, .player-cards-section {
     width: 100%;
 }
 
+/* Dealer-Karten */
 #dealer-cards {
     height: 20vh;
     min-width: 11.7vw;
@@ -226,50 +230,59 @@ button:disabled{
     border-radius: 1vh;
 }
 
+/* Kartenpositionierung bei Dealer und Spieler */
 #dealer-cards .card, #player-cards .card {
-    position:absolute;
+    position: absolute; /* Überlagern, falls benötigt */
     display: inline;
 }
 
+/* Dealer-Text (z.B. Punkteanzeige) */
 .dealer-cards-section p {
     font-size: 2.5vh;
     text-align: center;
     font-weight: bold;
 }
 
+/* Die erste Karte des Dealers */
 .first-card {
     height: 20vh;
     position: relative;
     margin-right: 1vw;
 }
 
+/* Punkte-Anzeige des Dealers */
 #dealer-score {
     margin-top: 5vh;
     text-align: center;
     height: 3vh;
 }
 
+/* === Spieler-Kartenbereich === */
 #player-cards {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     height: 20vh;
 }
+
+/* Spielerhand (für mehrere Hände z.B. bei Split) */
 .player-hand {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 40vh;
-    z-index: 2;
+    height: 45vh;
+    z-index: 2; /* Liegt über anderem Content */
 }
 
+/* Seitenhand (z.B. bei Split) */
 #side-hand {
     transform: translateY(-10vh);
-    scale: 0.7;
+    scale: 0.7; /* Verkleinert und verschoben */
 }
 
-.hand-cards{
+/* Kartencontainer für die Hand */
+.hand-cards {
     height: 20vh;
     width: 11.7vw;
     justify-self: center;
@@ -278,6 +291,7 @@ button:disabled{
     border-radius: 1vh;
 }
 
+/* Text unterhalb einer Hand (z.B. Punktestand oder Status) */
 .hand-text {
     width: 8vw;
     justify-self: center;
@@ -289,6 +303,7 @@ button:disabled{
     text-align: center;
 }
 
+/* Text-Elemente in der Handanzeige */
 .hand-text p, .hand-text strong {
     height: 3vh;
 }
