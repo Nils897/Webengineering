@@ -3,7 +3,7 @@
  * Der Header wird je nach Login-Status aus einer entsprechenden Datei geladen.
  */
 function loadLayout() {
-    const userData = localStorage.getItem("loggedInUser"); // localStorage statt sessionStorage
+    const userData = sessionStorage.getItem("loggedInUser");
     const isLoggedIn = !!userData;
 
     const headerFile = isLoggedIn ? "headerLoggedIn.html" : "headerNoLogIn.html";

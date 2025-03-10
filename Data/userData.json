@@ -1,38 +1,10 @@
 [
     {
-        "id": 1,
-        "firstName": "dqd",
-        "lastName": "wqdqwd",
-        "username": "qwdq",
-        "email": "fff@fwsf",
-        "password": "1234",
-        "credits": 0
-    },
-    {
-        "id": 2,
-        "firstName": "dqDWQD",
-        "lastName": "QWDQwdqw",
-        "username": "ha",
-        "email": "dqwd@fewfds",
-        "password": "1234",
-        "credits": -10
-    },
-    {
-        "id": 3,
-        "firstName": "Janne",
-        "lastName": "Nußbaum",
-        "username": "Lynix666",
-        "email": "janne.jn.xbox@gmail.com",
-        "password": "1234",
-        "credits": 580
-    },
-    {
-        "id": 4,
-        "firstName": "heiland",
-        "lastName": "humus",
-        "username": "1",
-        "email": "2@1",
-        "password": "1",
-        "credits": 120
+        "firstName": "Nils",
+        "lastName": "Haha",
+        "username": "Nils",
+        "email": "dhadla@dad.com",
+        "password": "$2b$10$/P35PGL2eckUtdIrZ63FYORfURtSPSCGRSxGgpmeYdIVasWQnToJC",
+        "credits": 10000
     }
 ]

@@ -1,7 +1,8 @@
+const bcrypt = require('bcrypt');
 const UserModel = require('../Models/userModel');
 
 /**
- * Registriert einen neuen Benutzer.
+ * Registriert einen neuen Benutzer mit verschlüsseltem Passwort.
  * @param {Object} req - Die Anforderungsdaten.
  * @param {Object} res - Die Antwortdaten.
  */
@@ -19,7 +20,10 @@ exports.registerUser = async (req, res) => {
             return res.status(400).json({ message: "Benutzername bereits vergeben" });
         }
 
-        const newUser = UserModel.addUser(firstName, lastName, username, email, password);
+        // Passwort verschlüsseln
+        const hashedPassword = await bcrypt.hash(password, 10); // 10 ist der Salt-Round-Wert
+
+        const newUser = UserModel.addUser(firstName, lastName, username, email, hashedPassword);
 
         res.status(201).json({
             message: "Registrierung & Anmeldung erfolgreich",
@@ -32,6 +36,7 @@ exports.registerUser = async (req, res) => {
     }
 };
 
+
 /**
  * Meldet einen Benutzer an.
  * @param {Object} req - Die Anforderungsdaten.
@@ -41,10 +46,17 @@ exports.loginUser = async (req, res) => {
     const { username, password } = req.body;
 
     const users = UserModel.loadUsers();
-    const user = users.find(u => u.username === username && u.password === password);
+    const user = users.find(u => u.username === username);
 
     if (!user) {
-        return res.status(401).json({ message: "Ungültige Anmeldedaten" });
+        return res.status(401).json({ message: "Ungültiger Username" });
+    }
+
+    // Passwort mit dem gespeicherten Hash vergleichen
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+        return res.status(401).json({ message: "Ungültiges Passwort" });
     }
 
     res.json({
@@ -59,6 +71,7 @@ exports.loginUser = async (req, res) => {
         }
     });
 };
+
 
 /**
  * Aktualisiert die Credits eines Benutzers.
