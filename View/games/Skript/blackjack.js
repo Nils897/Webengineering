@@ -257,18 +257,17 @@ function checkGameEnd() {
 
         if (pScore > 21) {
             handResults[i] = "Verloren (über 21)";
-            Account -= parseInt(betAmount[i]);
         } else if (dealerScore > 21) {
             handResults[i] = "Gewonnen (Dealer über 21)";
-            Account += parseInt(betAmount[i]);
+            Account += parseInt(betAmount[i]*2);
         } else if (pScore > dealerScore) {
             handResults[i] = "Gewonnen";
-            Account += parseInt(betAmount[i]);
+            Account += parseInt(betAmount[i]*2);
         } else if (pScore < dealerScore) {
             handResults[i] = "Verloren";
-            Account -= parseInt(betAmount[i]);
         } else {
             handResults[i] = "Unentschieden";
+            Account += parseInt(betAmount[i]);
         }
     }
 
@@ -316,6 +315,7 @@ function canDouble() {
 async function start() {
     handResults = [];
     betAmount[0] = betInput.value;
+    Account -= betAmount[0]
     playerTurn = 1;
     currentHandIndex = 0;
 
@@ -403,6 +403,7 @@ doubleButton.addEventListener("click", () => {
     if (!canDouble()) return;
 
     playerCards.push(deck.pop());
+    Account -= betAmount[currentHandIndex];
     betAmount[currentHandIndex] *= 2;
     updateUIPlayer();
 
@@ -421,6 +422,7 @@ splitButton.addEventListener("click", () => {
     const newHand = [card2, deck.pop()];
 
     playerHands.push(newHand);
+    Account -= betAmount[currentHandIndex];
     betAmount[currentHandIndex + 1] = betAmount[currentHandIndex];
     playerCards = playerHands[currentHandIndex];
 
