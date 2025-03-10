@@ -1,75 +1,66 @@
-/* Allgemeiner Body-Stil */
 body {
     font-family: Arial, sans-serif;
-    background-color: #333; /* Dunkler Hintergrund als Fallback */
-    background-image: url('../img/Designer.jpeg'); /* Hintergrundbild */
-    background-size: cover; /* Bild füllt den gesamten Bereich */
-    background-position: center; /* Bild bleibt zentriert */
-    background-attachment: fixed; /* Bild bleibt fixiert beim Scrollen */
+    background-color: #333;
+    background-image: url('../img/Designer.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
     color: white;
-    /* Zentriere den Inhalt sowohl horizontal als auch vertikal */
     display: flex;
-    justify-content: center; /* Horizontal zentrieren */
-    align-items: center; /* Vertikal zentrieren */
-    height: 100vh; /* Der Body nimmt die gesamte Bildschirmhöhe ein */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-/* Profil-Container */
 #profile {
     max-width: 600px;
     padding: 30px;
-    background-color: rgba(90, 86, 86, 0.8); /* Leicht durchsichtiger Hintergrund */
+    background-color: rgba(90, 86, 86, 0.8);
     border-radius: 8px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Weicherer Schatten */
-    text-align: center; /* Zentriere den Text im Profilbereich */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-/* Profil-Überschrift */
 #profile h1 {
-    color: white; /* Weiße Schriftfarbe für den Titel */
+    color: white;
     font-size: 24px;
-    margin-bottom: 20px; /* Abstand unter der Überschrift */
+    margin-bottom: 20px;
 }
 
-/* Benutzerdetails Container */
 #userDetails {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Etwas mehr Abstand zwischen den Zeilen */
+    gap: 15px;
     width: 100%;
-    margin-bottom: 30px; /* Abstand zum unteren Bereich */
+    margin-bottom: 30px;
 }
 
-/* Benutzerdetails Paragraph */
 #userDetails p {
     display: flex;
     font-size: 16px;
     margin: 0;
-    justify-content: center; /* Zentriere die Bezeichner und Daten innerhalb der Zeile */
+    justify-content: center;
 }
 
-/* Stile für die Bezeichner */
 #userDetails strong {
-    width: 150px; /* Feste Breite für die Bezeichner */
+    width: 150px;
     text-align: left;
     font-weight: bold;
-    color: white; /* Weiße Schriftfarbe für die Bezeichner */
+    color: white;
 }
 
-/* Stile für die Daten */
 #userDetails span {
     flex: 1;
     text-align: left;
-    color: white; /* Weiße Schriftfarbe für die Daten */
+    color: white;
 }
 
-/* Button zum Bearbeiten des Profils */
 #Logout {
     display: block;
     width: 100%;
-    background-color: #ff6606; /* Orangefarbener Hintergrund wie beim Anmeldefenster */
+    background-color: #ff6606;
     color: white;
     border: none;
     padding: 12px;
@@ -79,7 +70,6 @@ body {
     transition: background 0.3s;
 }
 
-/* Hover-Effekt für den Button */
 #editProfileButton:hover {
-    background-color: #ff8c3f; /* Helleres Orange bei Hover */
+    background-color: #ff8c3f;
 }
