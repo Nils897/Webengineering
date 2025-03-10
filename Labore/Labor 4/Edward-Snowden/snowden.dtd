@@ -1,8 +1,0 @@
-<!ELEMENT Textbox (Überschrift, Text)>
-<!ELEMENT Überschrift (#PCDATA)>
-<!ELEMENT Text (Absatz | Leerzeile)+>
-<!ELEMENT Absatz (Fett | Kursiv | Normal)+>
-<!ELEMENT Leerzeile EMPTY>
-<!ELEMENT Fett (#PCDATA)>
-<!ELEMENT Kursiv (#PCDATA)>
-<!ELEMENT Normal (#PCDATA)>
