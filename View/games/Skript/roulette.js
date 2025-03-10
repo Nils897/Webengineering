@@ -222,7 +222,7 @@ function bet(numbers, id) {
     bettingSettings.innerHTML = `
         <form id="bet-form">
             <label for="bet-amount">Einsatz:</label>
-            <input type="number" id="bet-amount" min="1" max="1000" value="1">
+            <input type="number" id="bet-amount" min="1" max="${account}" value="1">
             <button type="submit">Setzen</button>
         </form>
     `;
