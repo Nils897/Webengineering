@@ -316,6 +316,9 @@ async function start() {
     handResults = [];
     betAmount[0] = betInput.value;
     Account -= betAmount[0]
+    const userData = sessionStorage.getItem("loggedInUser");
+    const user = JSON.parse(userData);
+    updateCreditsOnServer(user.username, Account);
     playerTurn = 1;
     currentHandIndex = 0;
 
