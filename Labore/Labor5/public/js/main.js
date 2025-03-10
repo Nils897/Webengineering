@@ -14,11 +14,11 @@ if (interestTopic) {
 // Zeige die entsprechende PDF für jedes Themengebiet an
 function displayPDF(topic, pdfName) {
     const pdfContainer = document.createElement('div');
-    pdfContainer.style.height = '600px'; // Größe der Anzeige
+    pdfContainer.style.height = '600px';
     pdfContainer.style.width = '100%';
 
     const pdfIframe = document.createElement('iframe');
-    pdfIframe.src = `pdfs/${pdfName}.pdf`; // PDFs im Ordner "pdfs"
+    pdfIframe.src = `pdfs/${pdfName}.pdf`;
     pdfIframe.width = '100%';
     pdfIframe.height = '100%';
 
