@@ -1,6 +1,7 @@
 [
     {
         "id": 1,
+<<<<<<< Updated upstream
         "firstName": "dqd",
         "lastName": "wqdqwd",
         "username": "qwdq",
@@ -34,5 +35,13 @@
         "email": "2@1",
         "password": "1",
         "credits": 120
+=======
+        "firstName": "Nils",
+        "lastName": "Haha",
+        "username": "Nils",
+        "email": "dhadla@dad.com",
+        "password": "$2b$10$/P35PGL2eckUtdIrZ63FYORfURtSPSCGRSxGgpmeYdIVasWQnToJC",
+        "credits": 10000
+>>>>>>> Stashed changes
     }
 ]

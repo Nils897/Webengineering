@@ -39,7 +39,7 @@ document.getElementById("registration-form").addEventListener("submit", async fu
             sessionStorage.setItem("loggedInUser", JSON.stringify(result.user)); // Speichert die Benutzerdaten
             window.location.href = "index.html"; // Weiterleitung zur Startseite
         } else {
-            alert(result.message); // Zeigt eine Fehlermeldung an
+            alert(result.message);
         }
     } catch (error) {
         alert("Fehler bei der Verbindung zum Server"); // Fehlerbehandlung
