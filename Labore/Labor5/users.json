@@ -9,10 +9,10 @@
     "comments": "ich freue mich auf diese website"
   },
   {
-    "firstName": "fghjkl",
-    "lastName": "nein",
-    "username": "hallo",
-    "password": "#Hallo123",
+    "firstName": "Max",
+    "lastName": "Mustermann",
+    "username": "Maximizer",
+    "password": "password",
     "gender": "male",
     "interest": "JavaScript",
     "comments": ""
