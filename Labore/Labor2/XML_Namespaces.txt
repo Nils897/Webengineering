@@ -1,0 +1,4 @@
+XML-Namespaces dienen dazu, Namenskonflikte in XML-Dokumenten zu vermeiden,
+die auftreten können, wenn Elemente oder Attribute aus verschiedenen
+XML-Vokabularen denselben Namen verwenden. Durch die Verwendung von Namespaces
+können identisch benannte Elemente oder Attribute eindeutig unterschieden werden.

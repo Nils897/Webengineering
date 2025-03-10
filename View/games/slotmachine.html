@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/slotmachine.css">
+    <script src="../Skript/creditsService.js" defer></script>
+    <script src="Skript/slotmachine.js" defer></script>
+    <title>Slot Machine</title>
+</head>
+<body>
+<main>
+    <div class="container">
+        <div class="title-container">
+            <div class="title">JACKPOT</div>
+        </div>
+        <div class="slot-machine">
+            <div class="border-lights">
+                <div class="light"></div><div class="light"></div><div class="light"></div>
+                <div class="light"></div><div class="light"></div><div class="light"></div>
+                <div class="light"></div><div class="light"></div><div class="light"></div>
+            </div>
+            <div class="output-box">
+                <p id="output" class="output-text">Dreh am Rad!</p>
+            </div>
+
+            <div class="reels-container">
+                <div class="reel-container">
+                    <div class="reel" id="reel1"></div>
+                </div>
+                <div class="reel-container">
+                    <div class="reel" id="reel2"></div>
+                </div>
+                <div class="reel-container">
+                    <div class="reel" id="reel3"></div>
+                </div>
+                <div class="reel-container">
+                    <div class="reel" id="reel4"></div>
+                </div>
+                <div class="reel-container">
+                    <div class="reel" id="reel5"></div>
+                </div>
+            </div>
+            <div class="buttons" id="buttons">
+                <input type="number" id="input" min="10" value="10">
+                <button class="button" id="betButton" onclick="bet()">Setzen</button>
+                <button id="spinButton" class="button">Drehen</button>
+            </div>
+            <div class="lever"></div>
+            <div class="base">
+                <table>
+                    <tr>
+                        <th>Bedingung</th>
+                        <th>Auszahlung</th>
+                    </tr>
+                    <tr>
+                        <td>Kein Symbol gleich</td>
+                        <td>Keine Auszahlung</td>
+                    </tr>
+                    <tr>
+                        <td>2 Symbole gleich</td>
+                        <td>Einsatz</td>
+                    </tr>
+                    <tr>
+                        <td>3 Symbole gleich</td>
+                        <td>Einsatz x3</td>
+                    </tr>
+                    <tr>
+                        <td>4 Symbole gleich</td>
+                        <td>Einsatz x10</td>
+                    </tr>
+                    <tr>
+                        <td>5 Symbole gleich</td>
+                        <td>Einsatz x100</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+</body>
+</html>

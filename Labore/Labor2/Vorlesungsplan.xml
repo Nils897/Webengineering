@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Vorlesungsplan SYSTEM "Vorlesungsplan.dtd">
+<Vorlesungsplan>
+    <Woche KW="6">
+        <Tag Wochentag="Montag">
+            <Vorlesung>
+                <Titel>Mathematik II - Statistik</Titel>
+                <Dozent>Oettinger, M.</Dozent>
+                <Raum>H117/H118</Raum>
+                <Uhrzeit von="8:00" bis="11:15"/>
+            </Vorlesung>
+        </Tag>
+        <Tag Wochentag="Dienstag">
+            <Vorlesung>
+                <Titel>Kursbesprechung 2 Herr Judt</Titel>
+                <Dozent>Judt, A.</Dozent>
+                <Raum>H117/H118</Raum>
+                <Uhrzeit von="11:30" bis="13:00"/>
+            </Vorlesung>
+            <Vorlesung>
+                <Titel>Systemnahe Programmierung 2</Titel>
+                <Dozent>Vogt, T.</Dozent>
+                <Raum>H117/H118</Raum>
+                <Uhrzeit von="14:00" bis="17:15"/>
+            </Vorlesung>
+        </Tag>
+        <Tag Wochentag="Mittwoch">
+            <Vorlesung>
+                <Titel>Betriebssysteme (Techn. Informatik 2)</Titel>
+                <Dozent>Maier, A.</Dozent>
+                <Raum>H117/H118</Raum>
+                <Uhrzeit von="14:00" bis="17:15"/>
+            </Vorlesung>
+        </Tag>
+        <Tag Wochentag="Donnerstag">
+            <Vorlesung>
+                <Titel>Geschäftsprozesse</Titel>
+                <Dozent>Maulhardt, U.</Dozent>
+                <Raum>H117/H118</Raum>
+                <Uhrzeit von="14:00" bis="19:00"/>
+            </Vorlesung>
+        </Tag>
+        <Tag Wochentag="Freitag">
+            <Vorlesung>
+                <Titel>Theorie Software-Eng. I</Titel>
+                <Dozent>Wanninger, S.</Dozent>
+                <Raum>H117/H118</Raum>
+                <Uhrzeit von="8:00" bis="14:45"/>
+            </Vorlesung>
+        </Tag>
+    </Woche>
+</Vorlesungsplan>

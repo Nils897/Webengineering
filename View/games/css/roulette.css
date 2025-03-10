@@ -242,6 +242,12 @@ body {
     align-items: center;
 }
 
+#spin-button {
+    position: absolute;
+    bottom: 10%;
+    left: 65%;
+}
+
 
 /* Eingabefeld des Wettformulars */
 .betting-settings input {
