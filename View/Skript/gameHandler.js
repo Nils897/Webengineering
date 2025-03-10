@@ -1,15 +1,18 @@
-//Referenzierte Elemente
+// Referenzierte Elemente
 const backgroundImage = document.querySelector('.background-image');
 const slotMachineButton = document.querySelector('#slot-button');
 const rouletteButton = document.querySelector('#roulette-button');
 const blackJackButton = document.querySelector('#blackjack-button');
 const gameView = document.querySelector('#game');
 
-
-function closeGame(xOffset){
-    /* schließt das Spiel und geht zur ursprünglichen Position zurück */
+/**
+ * Schließt das aktuell laufende Spiel und setzt die Ansicht zurück.
+ *
+ * @param {string} xOffset - Der horizontale Versatz für die Zoom-Animation beim Schließen.
+ */
+function closeGame(xOffset) {
     gameView.innerHTML = '';
-    //Rauszoomen
+
     const zoomOutTiming = {
         duration: 1000,
         iterations: 1,
@@ -17,36 +20,41 @@ function closeGame(xOffset){
     };
     const zoomOut = [
         { transform: `scale(1.5) translateX(${xOffset})` },
-        { transform: 'scale(1) translateX(0)' }];
+        { transform: 'scale(1) translateX(0)' }
+    ];
 
     backgroundImage.animate(zoomOut, zoomOutTiming);
     backgroundImage.style.transform = 'scale(1) translateX(0)';
-    //Darstellen der Buttons
-    setTimeout(() =>{
+
+    setTimeout(() => {
         gameView.style.display = 'none';
         document.querySelectorAll('.game-button').forEach((field) => {
             field.style.display = 'flex';
         });
     }, 1000);
-
 }
 
+/**
+ * Startet das ausgewählte Spiel, führt eine Zoom-Animation durch
+ * und lädt das Spiel in ein iframe.
+ *
+ * @param {string} game - Der Name des Spiels, das gestartet werden soll (z. B. 'slot', 'roulette', 'blackjack').
+ */
 function startGame(game) {
-
     const userData = sessionStorage.getItem("loggedInUser");
     if (!userData) {
         console.error("Kein eingeloggter Benutzer gefunden!");
         alert("Bitte logge dich zuerst ein!");
-        window.location.href = "../logIn.html"; // Zurück zur Login-Seite
+        window.location.href = "../logIn.html";
         return;
     }
-    /* zoomt in das Bild und lädt das gewählte Spiel */
 
     gameView.style.display = 'flex';
-    //Buttons verschwinden lassen
+
     document.querySelectorAll('.game-button').forEach((field) => {
         field.style.display = 'none';
     });
+
     const zoomInTiming = {
         duration: 1000,
         iterations: 1,
@@ -54,72 +62,67 @@ function startGame(game) {
     };
 
     switch (game) {
-        case 'slot':
-            {
-                //An die richtige Position zoomen
-                const zoomIn = [
+        case 'slot': {
+            const zoomIn = [
                 { transform: 'scale(1) translateX(0)' },
-                { transform: 'scale(1.5) translateX(10%)' }]
-                backgroundImage.animate(zoomIn, zoomInTiming);
-                backgroundImage.style.transform = 'scale(1.5) translateX(10%)';
-                //Spiel starten, wenn Animation beendet ist
-                setTimeout(() => {
-                    gameView.innerHTML = `
+                { transform: 'scale(1.5) translateX(10%)' }
+            ];
+            backgroundImage.animate(zoomIn, zoomInTiming);
+            backgroundImage.style.transform = 'scale(1.5) translateX(10%)';
+
+            setTimeout(() => {
+                gameView.innerHTML = `
                     <button class="close-button">&#10006;</button>
                     <iframe src="./games/slotmachine.html"></iframe>
-                    `;
-                    //Spiel schließen bei Klicken auf den close-Button
-                    document.querySelector(".close-button").addEventListener("click", () => {
-                        closeGame('10%');
-                    })
-                }, 1000);
-                break;
-            }
-        case 'roulette':
-            {
-                //An die richtige Position zoomen
-                const zoomIn = [
+                `;
+                document.querySelector(".close-button").addEventListener("click", () => {
+                    closeGame('10%');
+                });
+            }, 1000);
+            break;
+        }
+        case 'roulette': {
+            const zoomIn = [
                 { transform: 'scale(1) translateX(0)' },
-                { transform: 'scale(1.5) translateX(-10%)' }]
-                backgroundImage.animate(zoomIn, zoomInTiming);
-                backgroundImage.style.transform = 'scale(1.5) translateX(-10%)';
-                //Spiel starten, wenn Animation beendet ist
-                setTimeout(() => {
-                    gameView.innerHTML = `
+                { transform: 'scale(1.5) translateX(-10%)' }
+            ];
+            backgroundImage.animate(zoomIn, zoomInTiming);
+            backgroundImage.style.transform = 'scale(1.5) translateX(-10%)';
+
+            setTimeout(() => {
+                gameView.innerHTML = `
                     <button class="close-button">&#10006;</button>
                     <iframe src="./games/roulette.html"></iframe>
-                    `;
-                    document.querySelector(".close-button").addEventListener("click", () => {
-                        closeGame('-10%');
-                    })
-                }, 1000);
-                break;
-            }
-        case 'blackjack':
-            {
-                //An die richtige Position zoomen
-                const zoomIn = [
+                `;
+                document.querySelector(".close-button").addEventListener("click", () => {
+                    closeGame('-10%');
+                });
+            }, 1000);
+            break;
+        }
+        case 'blackjack': {
+            const zoomIn = [
                 { transform: 'scale(1) translateX(0)' },
-                { transform: 'scale(1.7) translateX(0)' }]
-                backgroundImage.animate(zoomIn, zoomInTiming);
-                backgroundImage.style.transform = 'scale(1.7) translateX(0)';
-                //Spiel starten, wenn Animation beendet ist
-                setTimeout(() => {
-                    gameView.innerHTML = `
+                { transform: 'scale(1.7) translateX(0)' }
+            ];
+            backgroundImage.animate(zoomIn, zoomInTiming);
+            backgroundImage.style.transform = 'scale(1.7) translateX(0)';
+
+            setTimeout(() => {
+                gameView.innerHTML = `
                     <button class="close-button">&#10006;</button>
                     <iframe src="./games/blackjack.html"></iframe>
-                    `;
-                    //Spiel schließen bei Klicken auf den close-Button
-                    document.querySelector(".close-button").addEventListener("click", () => {
-                        closeGame('0%');
-                    })
-                }, 1000);
-                break;
-            }
+                `;
+                document.querySelector(".close-button").addEventListener("click", () => {
+                    closeGame('0%');
+                });
+            }, 1000);
+            break;
+        }
     }
 }
 
-//Spiele beim Klicken auf die jeweiligen Buttons starten
+// Event-Listener für die Buttons zum Starten der Spiele
 slotMachineButton.addEventListener('click', () => {
     startGame('slot');
 });

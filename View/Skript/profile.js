@@ -1,3 +1,8 @@
+/**
+ * Initialisiert das Benutzerprofil, indem die Benutzerdaten aus dem SessionStorage geladen
+ * und in die entsprechenden HTML-Elemente eingefügt werden.
+ * Falls kein Benutzer eingeloggt ist, wird eine Weiterleitung zur Login-Seite durchgeführt.
+ */
 function initProfile() {
     const userData = sessionStorage.getItem("loggedInUser");
 
@@ -8,6 +13,7 @@ function initProfile() {
         return;
     }
 
+    /** @const {Object} user - Die aus dem SessionStorage gelesenen Benutzerdaten. */
     const user = JSON.parse(userData);
 
     // Setze die Benutzerdaten in die entsprechenden span-Elemente
@@ -17,21 +23,23 @@ function initProfile() {
     document.getElementById("lastName").textContent = user.lastName;
     document.getElementById("username").textContent = user.username;
     document.getElementById("email").textContent = user.email;
-    document.getElementById("credits").textContent = user.credits + " Credits";
+    document.getElementById("credits").textContent = `${user.credits} Credits`;
 
+    // Event-Listener für den Logout-Button setzen
     document.getElementById("Logout").addEventListener("click", logout);
 }
 
-function logout(){
-    // Entferne den eingeloggten Benutzer
-    sessionStorage.removeItem("loggedInUser");
-    // Optional: eine Bestätigung oder Meldung anzeigen
-    alert("Du wurdest ausgeloggt.");
-    // Weiterleiten zur Login-Seite
-    window.location.href = "index.html";
+/**
+ * Führt den Logout-Prozess durch, indem die Benutzerdaten aus dem SessionStorage entfernt
+ * und der Benutzer zur Startseite weitergeleitet wird.
+ */
+function logout() {
+    sessionStorage.removeItem("loggedInUser"); // Entferne den eingeloggten Benutzer
+    alert("Du wurdest ausgeloggt."); // Optional: Eine Bestätigung anzeigen
+    window.location.href = "index.html"; // Weiterleiten zur Startseite
 }
 
-// Warten, bis das DOM geladen ist
+// Warten, bis das DOM geladen ist, und dann das Profil initialisieren
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initProfile);
 } else {
