@@ -84,8 +84,10 @@ function createDeck() {
  */
 function getScore(cards) {
     let score = cards.reduce((sum, card) => sum + card.value, 0);
-    let aceCount = cards.filter(card => card.name === "Ass").length;
+    let aceCount = cards.filter(card => card.name === "ass").length;
+    console.log(aceCount)
     while (score > 21 && aceCount > 0) {
+        console.log("hihihuhu")
         score -= 10;
         aceCount--;
     }
