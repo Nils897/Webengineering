@@ -4,9 +4,9 @@ body {
 }
 
 header {
-    display: flex; /* Flexbox aktivieren */
-    align-items: center; /* Vertikal zentrieren */
-    justify-content: space-between; /* Platz zwischen den Elementen */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: #222;
     color: white;
     padding: 10px 20px;
@@ -14,7 +14,7 @@ header {
     position: fixed;
     width: 100%;
     left: 0;
-    z-index: 1000; /* Stellt sicher, dass der Header immer im Vordergrund ist */
+    z-index: 1000;
 }
 
 .logo img {
@@ -51,7 +51,7 @@ nav ul li a:last-child {
 }
 
 nav ul li a:hover {
-    color: gold; /* Hover-Effekt in Gold */
+    color: gold;
 }
 
 @media (max-width: 768px) {
@@ -61,11 +61,11 @@ nav ul li a:hover {
         padding: 10px;
     }
     .logo img {
-        height: 70px; /* Verkleinerung des Logos */
+        height: 70px;
     }
     .title {
         font-size: 24px;
-        margin: 10px 0; /* Abstand zum nächsten Element */
+        margin: 10px 0;
     }
     nav ul {
         flex-direction: column;

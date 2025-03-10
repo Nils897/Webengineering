@@ -1,26 +1,22 @@
-/* Standard-Styling für das gesamte Layout */
 body {
     margin: 0;
     padding: 0;
-    /*background-image: url('../img/Designer.jpeg'); /* Hintergrundbild */
-    background-size: cover; /* Bild füllt den gesamten Bereich */
+    background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Fixiert das Hintergrundbild */
+    background-attachment: fixed;
     font-family: Arial, sans-serif;
 }
 
-/* Hauptinhalt mit Abstand zu Header und Footer */
 main {
     margin-top: 120px;
     margin-bottom: 80px;
     padding: 20px;
 }
 
-/* Container für das Hintergrundbild und die Buttons */
 .background-container {
     position: relative;
     width: 100%;
-    height: 100vh; /* Volle Höhe des Viewports */
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,9 +24,8 @@ main {
     overflow: hidden;
 }
 
-/* Allgemeine Button-Stile */
 .game-button {
-    position: absolute; /* Absolute Positionierung relativ zur .background-container */
+    position: absolute;
     background: rgba(0, 0, 0, 0.7);
     color: white;
     padding: 15px 30px;
@@ -42,40 +37,34 @@ main {
     cursor: pointer;
 }
 
-/* Slot Machine Button (oben links) */
 #slot-button {
     top: 42%;
     left: 12%;
 }
 
-/* Blackjack Button (zentral) */
 #blackjack-button {
     top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-/* Roulette Button (unten rechts) */
 #roulette-button {
     bottom: 35%;
     right: 20%;
 }
 
-/* Hover-Effekt */
 .game-button:hover {
     background: gold;
     color: black;
     transform: scale(1.1);
 }
 
-/* Hintergrund füllt die Seite komplett aus */
 #content {
     padding: 0;
     margin: 0;
     overflow: hidden;
 }
 
-/* Hintergrundbild */
 .background-image {
     position:absolute;
     top: 0;
@@ -85,7 +74,6 @@ main {
     z-index: -1;
 }
 
-/* Container für das Spiel */
 #game {
     position: absolute;
     width: 100%;
@@ -96,7 +84,6 @@ main {
     display: none;
 }
 
-/* Container für das Spiel */
 #game iframe {
     margin: 0;
     margin-top: 11.5vh;
@@ -106,7 +93,6 @@ main {
     border: none;
 }
 
-/* Schließen-Button */
 .close-button {
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
@@ -122,13 +108,11 @@ main {
     transition: scale 0.1s, background-color 0.1s;
 }
 
-/* Hovern über Schließen-Button */
 .close-button:hover{
     scale: 1.05;
     background-color: gold;
 }
 
-/* Klicken auf Schließen-Button */
 .close-button:active {
     scale: 0.95;
 }
