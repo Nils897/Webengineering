@@ -5,9 +5,9 @@ body {
     background-color: #121212;
     color: white;
     text-align: center;
-    background-image: url('../img/backgrounds/Designer(2).jpeg'); /* Pfad zu deinem Bild */
-    background-size: cover; /* Bild füllt die gesamte Seite */
-    background-position: center; /* Zentrierung */
+    background-image: url('../img/backgrounds/Designer(2).jpeg');
+    background-size: cover;
+    background-position: center;
     background-attachment: fixed;
 }
 
@@ -23,7 +23,7 @@ h1 {
 
 .shop-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Flexible Anzahl an Boxen */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     padding: 20px;
     justify-content: center;
