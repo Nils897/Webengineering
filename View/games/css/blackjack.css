@@ -48,7 +48,6 @@ button:disabled {
    padding: 5vh;
    padding-top: 0;
    width: 60%;
-   height: 90vh;
    display: flex;
    flex-direction: column;
    justify-content: center;
@@ -58,7 +57,6 @@ button:disabled {
 /* Einzelne Karten */
 .card {
     height: 20vh;
-    width: 5.5vw;
 }
 
 /* Karten in der Hit-Section */
@@ -71,10 +69,7 @@ button:disabled {
 /* === Top-Bereich mit Dealer, Spieler usw. === */
 .top-section {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Drei gleich große Spalten */
-    gap: 2vw;
     width: 100%;
-    flex: 1;
 }
 
 /* Hit-Bereich für Kartenaufnahme */
@@ -223,7 +218,6 @@ button:disabled {
 /* Dealer-Karten */
 #dealer-cards {
     height: 20vh;
-    min-width: 11.7vw;
     justify-self: center;
     padding: 1vh;
     outline: 0.3vh solid white;
@@ -232,7 +226,7 @@ button:disabled {
 
 /* Kartenpositionierung bei Dealer und Spieler */
 #dealer-cards .card, #player-cards .card {
-    position: absolute; /* Überlagern, falls benötigt */
+    position: absolute;
     display: inline;
 }
 
@@ -246,7 +240,6 @@ button:disabled {
 /* Die erste Karte des Dealers */
 .first-card {
     height: 20vh;
-    width: 5.5vw;
     position: relative;
     margin-right: 1vw;
 }
@@ -260,9 +253,7 @@ button:disabled {
 
 /* === Spieler-Kartenbereich === */
 #player-cards {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    display: grid;
     height: 20vh;
 }
 
@@ -273,7 +264,7 @@ button:disabled {
     justify-content: center;
     align-items: center;
     height: 45vh;
-    z-index: 2; /* Liegt über anderem Content */
+    z-index: 2;
 }
 
 /* Seitenhand (z.B. bei Split) */
@@ -285,7 +276,6 @@ button:disabled {
 /* Kartencontainer für die Hand */
 .hand-cards {
     height: 20vh;
-    width: 11.7vw;
     justify-self: center;
     padding: 1vh;
     outline: 0.3vh solid white;
@@ -294,7 +284,6 @@ button:disabled {
 
 /* Text unterhalb einer Hand (z.B. Punktestand oder Status) */
 .hand-text {
-    width: 8vw;
     justify-self: center;
     padding: 1vh;
     border: 0.3vh solid white;
@@ -307,4 +296,109 @@ button:disabled {
 /* Text-Elemente in der Handanzeige */
 .hand-text p, .hand-text strong {
     height: 3vh;
+}
+
+
+/* Responsives Design */
+@media screen and (min-width: 1200px) {
+    .blackjack-table{
+        height: 90vh;
+    }
+    .top-section{
+        grid-template-columns: 1fr 1fr 1fr;
+        flex: 1;
+    }
+    #player-cards {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .hand-cards {
+        width: 11.7vw;
+    }
+    .hand-text {
+        width: 8vw;
+    }
+    #dealer-cards{
+        min-width: 11.7vw;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .blackjack-table{
+        width: 100%;
+        height: 100vh;
+    }
+    .top-section{
+        grid-template-columns: 1fr 1fr 1fr;
+        flex: 1;
+    }
+    #player-cards {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .hand-cards {
+        width: 16vw;
+    }
+    .hand-text {
+        width: 12vw;
+    }
+    #dealer-cards{
+        min-width: 17vw;
+    }
+}
+@media screen and (max-width: 800px) {
+    .blackjack-table{
+        width: 100%;
+        height: 150vh;
+    }
+    .top-section{
+        grid-template-columns: 1fr 1fr;
+        row-gap: 2vh;
+    }
+    .bet-section {
+        margin: 0;
+    }
+    .hand-cards {
+        width: 16vw;
+    }
+    .hand-text {
+        width: 12vw;
+    }
+    #dealer-cards{
+        min-width: 21vw;
+    }
+    .bet-section input {
+        width: 5vw;
+    }
+}
+@media screen and (max-width: 500px) {
+    .blackjack-table{
+        width: 100%;
+        height: 320vh;
+    }
+    .top-section{
+        grid-template-columns: 1fr;
+        justify-content: center;
+        row-gap: 2vh;
+        width: 100%;
+    }
+    .bet-section {
+        margin: 0;
+    }
+    .hand-cards {
+        width: 25vw;
+    }
+    .hand-text {
+        width: 20vw;
+    }
+    #dealer-cards{
+        min-width: 40vw;
+        margin-left: 22vw;
+    }
+    .bet-section input {
+        width: 5vw;
+    }
+    #player-cards {
+        grid-template-columns: 1fr;
+    }
+    .more-options button {
+        width: 30vw;
+    }
 }
