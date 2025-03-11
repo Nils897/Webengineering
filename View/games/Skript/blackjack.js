@@ -243,24 +243,58 @@ function updateUIDealer() {
 
     document.getElementById("dealer-score").textContent = "";
 }
+/*------------------------------------Spiel Ablauf---------------------------------------------*/
+
+
+
+
+
+
 
 /**
- * Beendet das Spiel, aktualisiert das Konto und deckt ggf. ein neues Deck auf.
+ * Startet eine neue Runde.
  */
-function end() {
-    AccountDisplay.textContent = `Konto: ${Account}€`;
-    document.getElementById("stand").disabled = true;
-    document.getElementById("hit").disabled = true;
-    document.getElementById("restart").disabled = false;
-    doubleButton.disabled = true;
-
-    if (deck.length < 20) {
-        deck = createDeck();
-    }
+async function start() {
+    handResults = [];
+    betAmount[0] = betInput.value;
+    Account -= betAmount[0]
     const userData = sessionStorage.getItem("loggedInUser");
     const user = JSON.parse(userData);
     updateCreditsOnServer(user.username, Account);
+    playerTurn = 1;
+    currentHandIndex = 0;
+
+    document.querySelectorAll(".player-hand").forEach(hand => {
+        hand.querySelector(".hand-cards").innerHTML = "";
+        hand.querySelector(".hand-text strong").textContent = "";
+        hand.querySelectorAll(".hand-text p").forEach(element => element.textContent = "");
+    });
+
+    playerCards = [];
+    dealerCards = [];
+    playerHands = [[0][0]];
+
+    document.getElementById("start").disabled = true;
+    document.getElementById("restart").disabled = true;
+
+    updateUIDealer();
+    await playerHit();
+    playerHands = [playerCards];
+    updateUIPlayer();
+    await playerHit();
+    playerHands = [playerCards];
+    updateUIPlayer();
+    await dealerHit();
+    updateUIDealer();
+    dealerHit();
+
+    doubleButton.disabled = !canDouble();
+    splitButton.disabled = !canSplit();
+
+    document.getElementById("hit").disabled = false;
+    document.getElementById("stand").disabled = false;
 }
+
 
 /**
  * Prüft das Spielende und wertet die Hände gegen den Dealer aus.
@@ -309,51 +343,24 @@ function switchToNextHand() {
     }
 }
 
-
-
 /**
- * Startet eine neue Runde.
+ * Beendet das Spiel, aktualisiert das Konto und deckt ggf. ein neues Deck auf.
  */
-async function start() {
-    handResults = [];
-    betAmount[0] = betInput.value;
-    Account -= betAmount[0]
+function end() {
+    AccountDisplay.textContent = `Konto: ${Account}€`;
+    document.getElementById("stand").disabled = true;
+    document.getElementById("hit").disabled = true;
+    document.getElementById("restart").disabled = false;
+    doubleButton.disabled = true;
+
+    if (deck.length < 20) {
+        deck = createDeck();
+    }
     const userData = sessionStorage.getItem("loggedInUser");
     const user = JSON.parse(userData);
     updateCreditsOnServer(user.username, Account);
-    playerTurn = 1;
-    currentHandIndex = 0;
-
-    document.querySelectorAll(".player-hand").forEach(hand => {
-        hand.querySelector(".hand-cards").innerHTML = "";
-        hand.querySelector(".hand-text strong").textContent = "";
-        hand.querySelectorAll(".hand-text p").forEach(element => element.textContent = "");
-    });
-
-    playerCards = [];
-    dealerCards = [];
-    playerHands = [[0][0]];
-
-    document.getElementById("start").disabled = true;
-    document.getElementById("restart").disabled = true;
-
-    updateUIDealer();
-    await playerHit();
-    playerHands = [playerCards];
-    updateUIPlayer();
-    await playerHit();
-    playerHands = [playerCards];
-    updateUIPlayer();
-    await dealerHit();
-    updateUIDealer();
-    dealerHit();
-
-    doubleButton.disabled = !canDouble();
-    splitButton.disabled = !canSplit();
-
-    document.getElementById("hit").disabled = false;
-    document.getElementById("stand").disabled = false;
 }
+
 
 /**
  * Führt einen Karten-Zug für den Dealer aus (inkl. Animation).

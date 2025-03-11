@@ -15,5 +15,14 @@
         "email": "test@gmail.com",
         "password": "$2b$10$SsMPFEx9/o0bH/MZU1wxSez7csSIucVnbL0hZoMxvb4smPpMzVj4e",
         "credits": 10000
+    },
+    {
+        "id": null,
+        "firstName": "hi",
+        "lastName": "ha",
+        "username": "hu",
+        "email": "ha@hu",
+        "password": "$2b$10$TgfeXuOuKoIuNKHzU34d/e3ABNB8Za/.5IVC0ER8HvMTtEQyjYhMO",
+        "credits": 10
     }
 ]
