@@ -77,6 +77,23 @@ function createDeck() {
 }
 
 /**
+ * Prüft, ob ein Split möglich ist.
+ * @returns {boolean}
+ */
+function canSplit() {
+    return playerHands[currentHandIndex].length === 2 &&
+        playerHands[currentHandIndex][0].value === playerHands[currentHandIndex][1].value;
+}
+
+/**
+ * Prüft, ob ein Double möglich ist.
+ * @returns {boolean}
+ */
+function canDouble() {
+    return playerHands[currentHandIndex].length === 2 && playerTurn === 1;
+}
+
+/**
  * Berechnet den Gesamtwert einer Kartenhand.
  * Behandelt Asse flexibel (11 oder 1).
  * @param {Array} cards - Kartenhand
@@ -292,22 +309,7 @@ function switchToNextHand() {
     }
 }
 
-/**
- * Prüft, ob ein Split möglich ist.
- * @returns {boolean}
- */
-function canSplit() {
-    return playerHands[currentHandIndex].length === 2 &&
-        playerHands[currentHandIndex][0].value === playerHands[currentHandIndex][1].value;
-}
 
-/**
- * Prüft, ob ein Double möglich ist.
- * @returns {boolean}
- */
-function canDouble() {
-    return playerHands[currentHandIndex].length === 2 && playerTurn === 1;
-}
 
 /**
  * Startet eine neue Runde.
